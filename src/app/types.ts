@@ -4,6 +4,7 @@ export interface Welcome {
 }
 
 export interface Data {
+  message: any;
   monitors: Monitor[];
 }
 

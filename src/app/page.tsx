@@ -1,10 +1,14 @@
 "use client";
 import { useEffect, useState } from "react";
 import type { Welcome, OutputData } from "./types";
-import { useSearchParams } from 'next/navigation';
+import { useSearchParams } from "next/navigation";
 
 // to get the stopID -> https://till.mabe.at/rbl/
-async function fetchData(stopIDs: number[] = [4111, 4118]) {
+async function fetchData(stopIDs: number[] = []) {
+  // default stopIDs
+  if (stopIDs.length === 0) {
+    stopIDs = [4111, 4118];
+  }
   const query = stopIDs.map((id) => `stopID=${id}`).join("&");
   let res;
   try {
@@ -16,17 +20,24 @@ async function fetchData(stopIDs: number[] = [4111, 4118]) {
   }
 
   if (res.status !== 200) {
-    return { error: `Not able to reach Wiener Linien API! status: ${res.status}` };
+    return {
+      error: `Not able to reach Wiener Linien API! status: ${res.status}`,
+    };
   }
 
   let data = {} as Welcome;
   try {
     data = await res.json();
   } catch (e) {
-    return { error: "Wiener Linien API does not provide a valid JSON response" };
+    return {
+      error: "Wiener Linien API does not provide a valid JSON response",
+    };
   }
 
-  if (!data?.data?.monitors) {
+  if (!data.data.monitors[0].lines) {
+    if (data.data.message.value === "OK") {
+      return { error: "Wrong STOP ID!" };
+    }
     return { error: "Wiener Linien API response structure is invalid." };
   }
 
@@ -62,8 +73,8 @@ export default function Home() {
   const [parsedData, setParsedData] = useState<Record<string, OutputData[]>>();
 
   const searchParams = useSearchParams();
-  const query = searchParams.getAll('stopID').map(Number);
-  console.log('searchParams', query);
+  const query = searchParams.getAll("stopID").map(Number);
+  console.log("searchParams", query);
 
   useEffect(() => {
     fetchData(query).then((data) => setData(data as Welcome));
@@ -124,6 +135,20 @@ export default function Home() {
               </div>
             </div>
           ))}
+      </div>
+      <div className="my-10 text-center text-sm text-gray-400">
+        Use URL parameters e.g '/?stopID=123&stopID=124' to specify stop IDs.
+        <br />
+        Find valid stop IDs{" "}
+        <a
+          href="https://till.mabe.at/rbl/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-blue-400 underline"
+        >
+          here
+        </a>
+        .
       </div>
     </div>
   );
