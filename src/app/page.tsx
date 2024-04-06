@@ -1,113 +1,130 @@
-import Image from "next/image";
+"use client";
+import { useEffect, useState } from "react";
+import type { Welcome, OutputData } from "./types";
+import { useSearchParams } from 'next/navigation';
+
+// to get the stopID -> https://till.mabe.at/rbl/
+async function fetchData(stopIDs: number[] = [4111, 4118]) {
+  const query = stopIDs.map((id) => `stopID=${id}`).join("&");
+  let res;
+  try {
+    res = await fetch(`/api/proxy?${query}`);
+  } catch (error) {
+    return {
+      error: `Network error: ${error}`,
+    };
+  }
+
+  if (res.status !== 200) {
+    return { error: `Not able to reach Wiener Linien API! status: ${res.status}` };
+  }
+
+  let data = {} as Welcome;
+  try {
+    data = await res.json();
+  } catch (e) {
+    return { error: "Wiener Linien API does not provide a valid JSON response" };
+  }
+
+  if (!data?.data?.monitors) {
+    return { error: "Wiener Linien API response structure is invalid." };
+  }
+
+  return data;
+}
+
+function parseData(data: Welcome) {
+  const result: Record<string, OutputData[]> = {};
+
+  data.data.monitors.forEach((monitor) => {
+    const title = monitor.locationStop.properties.title;
+
+    monitor.lines.forEach((line) => {
+      const name = line.name;
+      const towards = line.towards;
+      const countdowns = line.departures?.departure
+        .map((departure) => departure.departureTime.countdown)
+        .filter((countdown) => countdown <= 30);
+      const newLine = { name, towards, countdowns };
+
+      if (!result[title]) {
+        result[title] = [];
+      }
+      result[title].push(newLine);
+    });
+  });
+  return Object.fromEntries(Object.entries(result).sort());
+}
 
 export default function Home() {
-  return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">src/app/page.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+  const [data, setData] = useState<Welcome>();
+  const [error, setError] = useState<string | null>(null);
+  const [parsedData, setParsedData] = useState<Record<string, OutputData[]>>();
+
+  const searchParams = useSearchParams();
+  const query = searchParams.getAll('stopID').map(Number);
+  console.log('searchParams', query);
+
+  useEffect(() => {
+    fetchData(query).then((data) => setData(data as Welcome));
+  }, []);
+
+  useEffect(() => {
+    try {
+      if (data) {
+        setParsedData(parseData(data));
+      }
+    } catch (e) {
+      setError("Real time data not available. 😓🚨");
+    }
+  }, [data]);
+
+  if (data && "error" in data) {
+    return (
+      <div className="container mx-auto p-2">
+        <h1 className="text-xl font-bold text-center mb-2">Public Transport</h1>
+        <div className="text-center text-red-500 font-semibold my-10">
+          {String(data.error)}
         </div>
       </div>
+    );
+  }
 
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-full sm:before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full sm:after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px] z-[-1]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
+  return (
+    <div className="container mx-auto p-2">
+      <h1 className="text-xl font-bold text-center mb-1">Public Transport</h1>
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-3">
+        {parsedData &&
+          Object.entries(parsedData).map(([title, lines]) => (
+            <div className="bg-white shadow-lg rounded-lg p-3" key={title}>
+              <div className="border-b-2 border-gray-200">
+                <h3 className="text-xl font-semibold mt-1">{title}</h3>
+              </div>
+              <div className="mt-4">
+                {lines.map((line) => (
+                  <div key={line.name} className="mb-1 flex items-center">
+                    <div>
+                      <div className="font-bold">{line.name}</div>
+                      <div className="text-gray-500">{line.towards}</div>
+                    </div>
+                    <div className="ml-3 mt-5">
+                      {line.countdowns?.map((countdown: number, i: number) => (
+                        <span
+                          key={i}
+                          className={`inline-block text-white rounded-full px-2 py-1 text-xs font-bold mr-1 ${
+                            countdown < 4 ? "bg-red-500" : "bg-green-500"
+                          }`}
+                        >
+                          {countdown}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
       </div>
-
-      <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Explore starter templates for Next.js.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50 text-balance`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+    </div>
   );
 }
