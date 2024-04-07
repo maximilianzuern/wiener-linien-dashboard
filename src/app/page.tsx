@@ -74,7 +74,6 @@ export default function Home() {
 
   const searchParams = useSearchParams();
   const query = searchParams.getAll("stopID").map(Number);
-  console.log("searchParams", query);
 
   useEffect(() => {
     fetchData(query).then((data) => setData(data as Welcome));
@@ -90,6 +89,23 @@ export default function Home() {
     }
   }, [data]);
 
+  const Footer = () => (
+    <div className="my-10 text-center text-sm text-gray-400">
+      Use URL parameters e.g &apos;/?stopID=123&amp;stopID=124&apos; to specify stop IDs.
+      <br />
+      Find valid stop IDs{" "}
+      <a
+        href="https://till.mabe.at/rbl/"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-blue-400 underline"
+      >
+        here
+      </a>
+      .
+    </div>
+  );
+
   if (data && "error" in data) {
     return (
       <div className="container mx-auto p-2">
@@ -97,6 +113,7 @@ export default function Home() {
         <div className="text-center text-red-500 font-semibold my-10">
           {String(data.error)}
         </div>
+        <Footer />
       </div>
     );
   }
@@ -135,21 +152,8 @@ export default function Home() {
               </div>
             </div>
           ))}
-      </div>
-      <div className="my-10 text-center text-sm text-gray-400">
-        Use URL parameters e.g '/?stopID=123&stopID=124' to specify stop IDs.
-        <br />
-        Find valid stop IDs{" "}
-        <a
-          href="https://till.mabe.at/rbl/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-blue-400 underline"
-        >
-          here
-        </a>
-        .
-      </div>
     </div>
-  );
+    <Footer />
+  </div>
+);
 }
