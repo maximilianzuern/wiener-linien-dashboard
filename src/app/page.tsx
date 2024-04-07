@@ -5,7 +5,7 @@ import { useSearchParams } from "next/navigation";
 
 // to get the stopID -> https://till.mabe.at/rbl/
 async function fetchData(stopIDs: number[] = []): Promise<Welcome | { error: string }> {
-  if (stopIDs.length === 0) {
+  if (stopIDs.length === 0 || stopIDs.some(isNaN)) {
     stopIDs = [4111, 4118];
   }
   const query = stopIDs.map((id) => `stopID=${id}`).join("&");
@@ -33,7 +33,7 @@ async function fetchData(stopIDs: number[] = []): Promise<Welcome | { error: str
     const monitor = data.data.monitors.find((monitor) => monitor.lines);
     if (!monitor) {
       if (data.message.value === "OK") {
-        return { error: "Wrong STOP ID!" };
+        return { error: "Invalid stopID!" };
       }
       return { error: "No valid monitor found in the API response." };
     }
@@ -76,7 +76,7 @@ export default function Home() {
   const [parsedData, setParsedData] = useState<Record<string, OutputData[]>>();
 
   const searchParams = useSearchParams();
-  const query = searchParams.getAll("stopID").map(Number);
+  const query = Array.from(searchParams.values()).map(Number);
 
   useEffect(() => {
     fetchData(query).then((data) => setData(data as Welcome));
