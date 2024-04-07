@@ -5,7 +5,7 @@ import { useSearchParams } from "next/navigation";
 
 // to get the stopID -> https://till.mabe.at/rbl/
 async function fetchData(stopIDs: number[] = []) {
-  // default stopIDs
+  // if no stopIDs are provided, use default ones
   if (stopIDs.length === 0) {
     stopIDs = [4111, 4118];
   }
