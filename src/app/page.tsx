@@ -4,44 +4,47 @@ import type { Welcome, OutputData } from "./types";
 import { useSearchParams } from "next/navigation";
 
 // to get the stopID -> https://till.mabe.at/rbl/
-async function fetchData(stopIDs: number[] = []) {
-  // if no stopIDs are provided, use default ones
+async function fetchData(stopIDs: number[] = []): Promise<Welcome | { error: string }> {
   if (stopIDs.length === 0) {
     stopIDs = [4111, 4118];
   }
   const query = stopIDs.map((id) => `stopID=${id}`).join("&");
-  let res;
+
   try {
-    res = await fetch(`/api/proxy?${query}`);
-  } catch (error) {
-    return {
-      error: `Network error: ${error}`,
-    };
-  }
+    const res = await fetch(`/api/proxy?${query}`);
 
-  if (res.status !== 200) {
-    return {
-      error: `Not able to reach Wiener Linien API! status: ${res.status}`,
-    };
-  }
-
-  let data = {} as Welcome;
-  try {
-    data = await res.json();
-  } catch (e) {
-    return {
-      error: "Wiener Linien API does not provide a valid JSON response",
-    };
-  }
-
-  if (!data.data.monitors[0].lines) {
-    if (data.data.message.value === "OK") {
-      return { error: "Wrong STOP ID!" };
+    if (res.status !== 200) {
+      return {
+        error: `Wiener Linien API request failed with status ${res.status}`,
+      };
     }
-    return { error: "Wiener Linien API response structure is invalid." };
-  }
+    
+    // Check if the response is valid JSON
+    let data: Welcome;
+    try {
+      data = await res.json();
+    } catch (error) {
+      return {
+        error: "Wiener Linien JSON response is invalid.",
+      };
+    }
 
-  return data;
+    // Check if the monitor has lines
+    const monitor = data.data.monitors.find((monitor) => monitor.lines);
+    if (!monitor) {
+      if (data.message.value === "OK") {
+        return { error: "Wrong STOP ID!" };
+      }
+      return { error: "No valid monitor found in the API response." };
+    }
+
+    return data;
+  } catch (error) {
+    if (error instanceof Error) {
+      return { error: `Error: ${error.message}` };
+    }
+    return { error: "An unknown error occurred." };
+  }
 }
 
 function parseData(data: Welcome) {
