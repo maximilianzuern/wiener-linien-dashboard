@@ -4,7 +4,9 @@ import type { Welcome, OutputData } from "./types";
 import { useSearchParams } from "next/navigation";
 
 // to get the stopID -> https://till.mabe.at/rbl/
-async function fetchData(stopIDs: number[] = []): Promise<Welcome | { error: string }> {
+async function fetchData(
+  stopIDs: number[] = []
+): Promise<Welcome | { error: string }> {
   if (stopIDs.length === 0 || stopIDs.some(isNaN)) {
     stopIDs = [4111, 4118];
   }
@@ -18,7 +20,7 @@ async function fetchData(stopIDs: number[] = []): Promise<Welcome | { error: str
         error: `Wiener Linien API request failed with status ${res.status}`,
       };
     }
-    
+
     // Check if the response is valid JSON
     let data: Welcome;
     try {
@@ -59,7 +61,13 @@ function parseData(data: Welcome) {
       const countdowns = line.departures?.departure
         .map((departure) => departure.departureTime.countdown)
         .filter((countdown) => countdown <= 30);
-      const newLine = { name, towards, countdowns };
+      const timePlanned = line.departures?.departure.map(
+        (departure) => departure.departureTime.timePlanned
+      );
+      const aircon = line.departures?.departure.map(
+        (departure) => departure.vehicle?.foldingRampType !== undefined
+      );
+      const newLine = { name, towards, countdowns, timePlanned, aircon };
 
       if (!result[title]) {
         result[title] = [];
@@ -77,6 +85,7 @@ export default function Home() {
 
   const searchParams = useSearchParams();
   const query = Array.from(searchParams.values()).map(Number);
+  const airconditionedMetros = ["U6"];
 
   useEffect(() => {
     fetchData(query).then((data) => setData(data as Welcome));
@@ -94,7 +103,8 @@ export default function Home() {
 
   const Footer = () => (
     <div className="my-10 text-center text-sm text-gray-400">
-      Use URL parameters e.g &apos;/?stopID=123&amp;stopID=124&apos; to specify stop IDs.
+      Use URL parameters e.g &apos;/?stopID=123&amp;stopID=124&apos; to specify
+      stop IDs.
       <br />
       Find valid stop IDs{" "}
       <a
@@ -106,6 +116,8 @@ export default function Home() {
         here
       </a>
       .
+      <br />
+      This website is cookie-free.
     </div>
   );
 
@@ -139,14 +151,32 @@ export default function Home() {
                       <div className="text-gray-500">{line.towards}</div>
                     </div>
                     <div className="ml-3 mt-5">
-                      {line.countdowns?.map((countdown: number, i: number) => (
-                        <span
-                          key={i}
-                          className={`inline-block text-white rounded-full px-2 py-1 text-xs font-bold mr-1 ${
-                            countdown < 4 ? "bg-red-500" : "bg-green-500"
-                          }`}
-                        >
-                          {countdown}
+                      {line.countdowns?.slice(0, 6).map((countdown: number, i: number) => (
+                        <span key={i} className="relative inline-block mr-2">
+                          <span
+                            key={i}
+                            className={`inline-block text-white rounded-full px-2 py-1 text-xs font-bold mr-1 
+                            ${countdown < 4 ? "bg-red-600" : "bg-green-600"} 
+                            ${countdown < 2 ? "animate-pulse" : ""}
+                            ${
+                              line.aircon && (airconditionedMetros.includes(line.name) || line.aircon[i])
+                                ? "border-2 border-blue-600"
+                                : ""
+                            }
+                            `}
+                            title={
+                              line.aircon && (airconditionedMetros.includes(line.name) || line.aircon[i])
+                                ? "❄️ A/C available"
+                                : ""
+                            }
+                          >
+                            {countdown}
+                          </span>
+                          {line.aircon && (airconditionedMetros.includes(line.name) || line.aircon[i]) && (
+                            <span className="absolute -top-2 -right-1 text-xs">
+                              ❄️
+                            </span>
+                          )}
                         </span>
                       ))}
                     </div>
@@ -155,8 +185,8 @@ export default function Home() {
               </div>
             </div>
           ))}
+      </div>
+      <Footer />
     </div>
-    <Footer />
-  </div>
-);
+  );
 }

@@ -97,4 +97,6 @@ export type OutputData = {
   name: string;
   towards: string;
   countdowns: number[] | undefined;
+  timePlanned: string[] | undefined;
+  aircon: boolean[] | undefined;
 };
