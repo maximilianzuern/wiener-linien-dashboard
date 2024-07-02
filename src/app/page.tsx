@@ -11,8 +11,9 @@ const AIRCONDITIONED_METROS = ["U6"];
 
 // to get the stopID -> https://till.mabe.at/rbl/
 async function fetchData(stopIDs: number[] = []): Promise<Welcome | { error: string }> {
-  const validStopIDs = stopIDs.length > 0 && stopIDs.every(id => !isNaN(id)) ? stopIDs : DEFAULT_STOP_IDS;
-  const query = new URLSearchParams(validStopIDs.map(id => ["stopID", id.toString()])).toString();
+  const validStopIDs =
+    stopIDs.length > 0 && stopIDs.every((id) => !isNaN(id)) ? stopIDs : DEFAULT_STOP_IDS;
+  const query = new URLSearchParams(validStopIDs.map((id) => ["stopID", id.toString()])).toString();
 
   try {
     const res = await fetch(`${API_BASE_URL}?${query}`);
@@ -20,11 +21,11 @@ async function fetchData(stopIDs: number[] = []): Promise<Welcome | { error: str
     if (!res.ok) {
       throw new Error(`Wiener Linien API request failed with status ${res.status}`);
     }
-    
+
     const data: Welcome = await res.json();
 
     // Check if the monitor has lines
-    const monitor = data.data.monitors.find(monitor => monitor.lines);
+    const monitor = data.data.monitors.find((monitor) => monitor.lines);
     if (!monitor) {
       if (data.message.value === "OK") {
         return { error: "Invalid stopID!" };
@@ -44,19 +45,20 @@ async function fetchData(stopIDs: number[] = []): Promise<Welcome | { error: str
 function parseData(data: Welcome): Record<string, OutputData[]> {
   const result: Record<string, OutputData[]> = {};
 
-  data.data.monitors.forEach(monitor => {
+  data.data.monitors.forEach((monitor) => {
     const title = monitor.locationStop.properties.title;
 
-    monitor.lines.forEach(line => {
+    monitor.lines.forEach((line) => {
       const { name, towards, departures } = line;
       const countdowns = departures?.departure
         .map((departure) => departure.departureTime.countdown)
         .filter((countdown) => countdown <= MAX_COUNTDOWN);
-      const timePlanned = departures?.departure.map(departure => {
+      const timePlanned = departures?.departure.map((departure) => {
         const date = new Date(departure.departureTime.timePlanned);
-        return date.toTimeString().split(' ')[0];
+        return date.toTimeString().split(" ")[0];
       });
-      const aircon = departures?.departure.map(dep => dep.vehicle?.foldingRampType !== undefined) ?? [];
+      const aircon =
+        departures?.departure.map((dep) => dep.vehicle?.foldingRampType !== undefined) ?? [];
 
       if (!result[title]) {
         result[title] = [];
@@ -89,99 +91,105 @@ export default function Home() {
     }
   }, [data]);
 
-if (error) {
+  if (error) {
+    return (
+      <div className="container mx-auto p-2">
+        <h1 className="text-xl font-bold text-center mb-2">Vienna Public Transport</h1>
+        <div className="text-center text-red-500 font-semibold my-10">{error}</div>
+        <Footer />
+      </div>
+    );
+  }
+
   return (
     <div className="container mx-auto p-2">
-      <h1 className="text-xl font-bold text-center mb-2">Vienna Public Transport</h1>
-      <div className="text-center text-red-500 font-semibold my-10">
-        {error}
+      <h1 className="text-xl font-bold text-center mb-1">Vienna Public Transport</h1>
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-3">
+        {parsedData &&
+          Object.entries(parsedData).map(([title, lines]) => (
+            <StopCard key={title} title={title} lines={lines} />
+          ))}
       </div>
       <Footer />
     </div>
   );
 }
 
-return (
-  <div className="container mx-auto p-2">
-    <h1 className="text-xl font-bold text-center mb-1">Vienna Public Transport</h1>
-    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-3">
-      {parsedData &&
-        Object.entries(parsedData).map(([title, lines]) => (
-          <StopCard key={title} title={title} lines={lines} />
-        ))}
-    </div>
-    <Footer />
-  </div>
-);
-}
-
 const StopCard = ({ title, lines }: { title: string; lines: OutputData[] }) => (
-<div className="bg-white shadow-lg rounded-lg p-3">
-  <div className="border-b-2 border-gray-200">
-    <h3 className="text-xl font-semibold mt-1">{title}</h3>
+  <div className="bg-white shadow-lg rounded-lg p-3">
+    <div className="border-b-2 border-gray-200">
+      <h3 className="text-xl font-semibold mt-1">{title}</h3>
+    </div>
+    <div className="mt-4">
+      {lines.map((line) => (
+        <LineInfo key={line.name} line={line} />
+      ))}
+    </div>
   </div>
-  <div className="mt-4">
-    {lines.map(line => (
-      <LineInfo key={line.name} line={line} />
-    ))}
-  </div>
-</div>
 );
 
 const LineInfo = ({ line }: { line: OutputData }) => (
-<div className="mb-1 flex items-center">
-  <div>
-    <div className="font-bold">{line.name}</div>
-    <div className="text-gray-500">{line.towards}</div>
+  <div className="mb-1 flex items-center">
+    <div>
+      <div className="font-bold">{line.name}</div>
+      <div className="text-gray-500">{line.towards}</div>
+    </div>
+    <div className="ml-3 mt-5">
+      {line.countdowns?.slice(0, MAX_DISPLAYED_COUNTDOWNS).map((countdown, i) => (
+        <CountdownBadge
+          key={i}
+          countdown={countdown}
+          hasAircon={line.aircon && (AIRCONDITIONED_METROS.includes(line.name) || line.aircon[i])}
+          timePlanned={line.timePlanned && line.timePlanned[i]}
+        />
+      ))}
+    </div>
   </div>
-  <div className="ml-3 mt-5">
-    {line.countdowns?.slice(0, MAX_DISPLAYED_COUNTDOWNS).map((countdown, i) => (
-      <CountdownBadge
-        key={i}
-        countdown={countdown}
-        hasAircon={line.aircon && (AIRCONDITIONED_METROS.includes(line.name) || line.aircon[i])}
-        timePlanned={line.timePlanned && line.timePlanned[i]}
-      />
-    ))}
-  </div>
-</div>
 );
 
-const CountdownBadge = ({ countdown, timePlanned, hasAircon }: { countdown: number; timePlanned?: string, hasAircon?: boolean}) => (
-<span className="relative inline-block mr-2">
-  <span
-    className={`inline-block text-white rounded-full px-2 py-1 text-xs font-bold mr-1 
+const CountdownBadge = ({
+  countdown,
+  timePlanned,
+  hasAircon,
+}: {
+  countdown: number;
+  timePlanned?: string;
+  hasAircon?: boolean;
+}) => (
+  <span className="relative inline-block mr-2">
+    <span
+      className={`inline-block text-white rounded-full px-2 py-1 text-xs font-bold mr-1 
     ${countdown < 4 ? "bg-red-600" : "bg-green-600"} 
     ${countdown < 2 ? "animate-pulse" : ""}
     ${hasAircon ? "border-2 border-blue-600" : ""}
     `}
-    title={timePlanned ? timePlanned : ""}
-  >
-    {countdown}
-  </span>
-  {hasAircon && (
-    <span className="absolute -top-2 -right-1 text-xs" title="❄️ A/C available">
-      ❄️
+      title={timePlanned ? timePlanned : ""}
+    >
+      {countdown}
     </span>
-  )}
-</span>
+    {hasAircon && (
+      <span className="absolute -top-2 -right-1 text-xs" title="❄️ A/C available">
+        ❄️
+      </span>
+    )}
+  </span>
 );
 
 const Footer = () => (
-<div className="my-10 text-center text-sm text-gray-400">
-  Use URL parameters e.g &apos;/?stopID=123&amp;stopID=124&apos; to specify stop IDs.
-  <br />
-  Find valid stop IDs{" "}
-  <a
-    href="https://till.mabe.at/rbl/"
-    target="_blank"
-    rel="noopener noreferrer"
-    className="text-blue-400 underline"
-  >
-    here
-  </a>
-  .
-  <br />
-  🍪 This website is cookie-free.
-</div>
+  <div className="my-10 text-center text-sm text-gray-400">
+    Use URL parameters e.g &apos;/?stopID=123&amp;stopID=124&apos; to specify stop IDs.
+    <br />
+    Find valid stop IDs{" "}
+    <a
+      href="https://till.mabe.at/rbl/"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="text-blue-400 underline"
+    >
+      here
+    </a>
+    .
+    <br />
+    🍪 This website is cookie-free.
+  </div>
 );
