@@ -20,16 +20,7 @@ async function fetchData(stopIDs: number[] = []): Promise<Welcome | { error: str
     if (!res.ok) {
       throw new Error(`Wiener Linien API request failed with status ${res.status}`);
     }
-
-    // Check if the response is valid JSON
-    // let data: Welcome;
-    // try {
-    //   data = await res.json();
-    // } catch (error) {
-    //   return {
-    //     error: "Wiener Linien JSON response is invalid.",
-    //   };
-    // }
+    
     const data: Welcome = await res.json();
 
     // Check if the monitor has lines
@@ -50,38 +41,34 @@ async function fetchData(stopIDs: number[] = []): Promise<Welcome | { error: str
   }
 }
 
-function parseData(data: Welcome) {
+function parseData(data: Welcome): Record<string, OutputData[]> {
   const result: Record<string, OutputData[]> = {};
 
-  data.data.monitors.forEach((monitor) => {
+  data.data.monitors.forEach(monitor => {
     const title = monitor.locationStop.properties.title;
 
-    monitor.lines.forEach((line) => {
-      const name = line.name;
-      const towards = line.towards;
-      const countdowns = line.departures?.departure
+    monitor.lines.forEach(line => {
+      const { name, towards, departures } = line;
+      const countdowns = departures?.departure
         .map((departure) => departure.departureTime.countdown)
         .filter((countdown) => countdown <= MAX_COUNTDOWN);
-      const timePlanned = line.departures?.departure.map((departure) => {
+      const timePlanned = departures?.departure.map(departure => {
         const date = new Date(departure.departureTime.timePlanned);
         return date.toTimeString().split(' ')[0];
       });
-      const aircon = line.departures?.departure.map(
-        (departure) => departure.vehicle?.foldingRampType !== undefined
-      );
-      const newLine = { name, towards, countdowns, timePlanned, aircon };
+      const aircon = departures?.departure.map(dep => dep.vehicle?.foldingRampType !== undefined) ?? [];
 
       if (!result[title]) {
         result[title] = [];
       }
-      result[title].push(newLine);
+      result[title].push({ name, towards, countdowns, timePlanned, aircon });
     });
   });
   return Object.fromEntries(Object.entries(result).sort());
 }
 
 export default function Home() {
-  const [data, setData] = useState<Welcome>();
+  const [data, setData] = useState<Welcome | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [parsedData, setParsedData] = useState<Record<string, OutputData[]>>();
 
