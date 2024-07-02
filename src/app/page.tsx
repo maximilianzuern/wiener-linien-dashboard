@@ -136,7 +136,7 @@ export default function Home() {
   return (
     <div className="container mx-auto p-2">
       <h1 className="text-xl font-bold text-center mb-1">Public Transport</h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-3">
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3">
         {parsedData &&
           Object.entries(parsedData).map(([title, lines]) => (
             <div className="bg-white shadow-lg rounded-lg p-3" key={title}>
