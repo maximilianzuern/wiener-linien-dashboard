@@ -17,7 +17,6 @@ async function fetchData(stopIDs: number[] = []): Promise<Welcome | { error: str
 
   try {
     const res = await fetch(`${API_BASE_URL}?${query}`);
-
     if (!res.ok) {
       throw new Error(`Wiener Linien API request failed with status ${res.status}`);
     }
