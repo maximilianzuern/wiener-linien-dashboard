@@ -3,36 +3,37 @@ import { useEffect, useState } from "react";
 import type { Welcome, OutputData } from "./types";
 import { useSearchParams } from "next/navigation";
 
+const DEFAULT_STOP_IDS = [4111, 4118];
+const API_BASE_URL = "/api/proxy";
+const MAX_COUNTDOWN = 30;
+const MAX_DISPLAYED_COUNTDOWNS = 6;
+const AIRCONDITIONED_METROS = ["U6"];
+
 // to get the stopID -> https://till.mabe.at/rbl/
-async function fetchData(
-  stopIDs: number[] = []
-): Promise<Welcome | { error: string }> {
-  if (stopIDs.length === 0 || stopIDs.some(isNaN)) {
-    stopIDs = [4111, 4118];
-  }
-  const query = stopIDs.map((id) => `stopID=${id}`).join("&");
+async function fetchData(stopIDs: number[] = []): Promise<Welcome | { error: string }> {
+  const validStopIDs = stopIDs.length > 0 && stopIDs.every(id => !isNaN(id)) ? stopIDs : DEFAULT_STOP_IDS;
+  const query = new URLSearchParams(validStopIDs.map(id => ["stopID", id.toString()])).toString();
 
   try {
-    const res = await fetch(`/api/proxy?${query}`);
+    const res = await fetch(`${API_BASE_URL}?${query}`);
 
-    if (res.status !== 200) {
-      return {
-        error: `Wiener Linien API request failed with status ${res.status}`,
-      };
+    if (!res.ok) {
+      throw new Error(`Wiener Linien API request failed with status ${res.status}`);
     }
 
     // Check if the response is valid JSON
-    let data: Welcome;
-    try {
-      data = await res.json();
-    } catch (error) {
-      return {
-        error: "Wiener Linien JSON response is invalid.",
-      };
-    }
+    // let data: Welcome;
+    // try {
+    //   data = await res.json();
+    // } catch (error) {
+    //   return {
+    //     error: "Wiener Linien JSON response is invalid.",
+    //   };
+    // }
+    const data: Welcome = await res.json();
 
     // Check if the monitor has lines
-    const monitor = data.data.monitors.find((monitor) => monitor.lines);
+    const monitor = data.data.monitors.find(monitor => monitor.lines);
     if (!monitor) {
       if (data.message.value === "OK") {
         return { error: "Invalid stopID!" };
@@ -60,10 +61,11 @@ function parseData(data: Welcome) {
       const towards = line.towards;
       const countdowns = line.departures?.departure
         .map((departure) => departure.departureTime.countdown)
-        .filter((countdown) => countdown <= 30);
-      const timePlanned = line.departures?.departure.map(
-        (departure) => departure.departureTime.timePlanned
-      );
+        .filter((countdown) => countdown <= MAX_COUNTDOWN);
+      const timePlanned = line.departures?.departure.map((departure) => {
+        const date = new Date(departure.departureTime.timePlanned);
+        return date.toTimeString().split(' ')[0];
+      });
       const aircon = line.departures?.departure.map(
         (departure) => departure.vehicle?.foldingRampType !== undefined
       );
@@ -85,7 +87,6 @@ export default function Home() {
 
   const searchParams = useSearchParams();
   const query = Array.from(searchParams.values()).map(Number);
-  const airconditionedMetros = ["U6"];
 
   useEffect(() => {
     fetchData(query).then((data) => setData(data as Welcome));
@@ -151,7 +152,7 @@ export default function Home() {
                       <div className="text-gray-500">{line.towards}</div>
                     </div>
                     <div className="ml-3 mt-5">
-                      {line.countdowns?.slice(0, 6).map((countdown: number, i: number) => (
+                      {line.countdowns?.slice(0, MAX_DISPLAYED_COUNTDOWNS).map((countdown: number, i: number) => (
                         <span key={i} className="relative inline-block mr-2">
                           <span
                             key={i}
@@ -159,21 +160,17 @@ export default function Home() {
                             ${countdown < 4 ? "bg-red-600" : "bg-green-600"} 
                             ${countdown < 2 ? "animate-pulse" : ""}
                             ${
-                              line.aircon && (airconditionedMetros.includes(line.name) || line.aircon[i])
+                              line.aircon && (AIRCONDITIONED_METROS.includes(line.name) || line.aircon[i])
                                 ? "border-2 border-blue-600"
                                 : ""
                             }
                             `}
-                            title={
-                              line.aircon && (airconditionedMetros.includes(line.name) || line.aircon[i])
-                                ? "❄️ A/C available"
-                                : ""
-                            }
+                            title={line.timePlanned && line.timePlanned[i]}
                           >
                             {countdown}
                           </span>
-                          {line.aircon && (airconditionedMetros.includes(line.name) || line.aircon[i]) && (
-                            <span className="absolute -top-2 -right-1 text-xs">
+                          {line.aircon && (AIRCONDITIONED_METROS.includes(line.name) || line.aircon[i]) && (
+                            <span className="absolute -top-2 -right-1 text-xs" title="❄️ A/C available">
                               ❄️
                             </span>
                           )}
