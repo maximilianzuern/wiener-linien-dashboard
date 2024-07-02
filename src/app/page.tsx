@@ -78,16 +78,22 @@ export default function Home() {
   const query = Array.from(searchParams.values()).map(Number);
 
   useEffect(() => {
-    fetchData(query).then((data) => setData(data as Welcome));
+    fetchData(query).then((result) => {
+      if ('error' in result) {
+        setError(result.error);
+      } else {
+        setData(result);
+      }
+    });
   }, []);
 
   useEffect(() => {
-    try {
-      if (data) {
+    if (data) {
+      try {
         setParsedData(parseData(data));
+      } catch (e) {
+        setError("Real time data not available. 😓🚨");
       }
-    } catch (e) {
-      setError("Real time data not available. 😓🚨");
     }
   }, [data]);
 
