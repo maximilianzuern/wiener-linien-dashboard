@@ -89,88 +89,99 @@ export default function Home() {
     }
   }, [data]);
 
-  const Footer = () => (
-    <div className="my-10 text-center text-sm text-gray-400">
-      Use URL parameters e.g &apos;/?stopID=123&amp;stopID=124&apos; to specify
-      stop IDs.
-      <br />
-      Find valid stop IDs{" "}
-      <a
-        href="https://till.mabe.at/rbl/"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="text-blue-400 underline"
-      >
-        here
-      </a>
-      .
-      <br />
-      This website is cookie-free.
-    </div>
-  );
-
-  if (data && "error" in data) {
-    return (
-      <div className="container mx-auto p-2">
-        <h1 className="text-xl font-bold text-center mb-2">Public Transport</h1>
-        <div className="text-center text-red-500 font-semibold my-10">
-          {String(data.error)}
-        </div>
-        <Footer />
-      </div>
-    );
-  }
-
+if (error) {
   return (
     <div className="container mx-auto p-2">
-      <h1 className="text-xl font-bold text-center mb-1">Public Transport</h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3">
-        {parsedData &&
-          Object.entries(parsedData).map(([title, lines]) => (
-            <div className="bg-white shadow-lg rounded-lg p-3" key={title}>
-              <div className="border-b-2 border-gray-200">
-                <h3 className="text-xl font-semibold mt-1">{title}</h3>
-              </div>
-              <div className="mt-4">
-                {lines.map((line) => (
-                  <div key={line.name} className="mb-1 flex items-center">
-                    <div>
-                      <div className="font-bold">{line.name}</div>
-                      <div className="text-gray-500">{line.towards}</div>
-                    </div>
-                    <div className="ml-3 mt-5">
-                      {line.countdowns?.slice(0, MAX_DISPLAYED_COUNTDOWNS).map((countdown: number, i: number) => (
-                        <span key={i} className="relative inline-block mr-2">
-                          <span
-                            key={i}
-                            className={`inline-block text-white rounded-full px-2 py-1 text-xs font-bold mr-1 
-                            ${countdown < 4 ? "bg-red-600" : "bg-green-600"} 
-                            ${countdown < 2 ? "animate-pulse" : ""}
-                            ${
-                              line.aircon && (AIRCONDITIONED_METROS.includes(line.name) || line.aircon[i])
-                                ? "border-2 border-blue-600"
-                                : ""
-                            }
-                            `}
-                            title={line.timePlanned && line.timePlanned[i]}
-                          >
-                            {countdown}
-                          </span>
-                          {line.aircon && (AIRCONDITIONED_METROS.includes(line.name) || line.aircon[i]) && (
-                            <span className="absolute -top-2 -right-1 text-xs" title="❄️ A/C available">
-                              ❄️
-                            </span>
-                          )}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          ))}
+      <h1 className="text-xl font-bold text-center mb-2">Vienna Public Transport</h1>
+      <div className="text-center text-red-500 font-semibold my-10">
+        {error}
       </div>
       <Footer />
     </div>
   );
 }
+
+return (
+  <div className="container mx-auto p-2">
+    <h1 className="text-xl font-bold text-center mb-1">Vienna Public Transport</h1>
+    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-3">
+      {parsedData &&
+        Object.entries(parsedData).map(([title, lines]) => (
+          <StopCard key={title} title={title} lines={lines} />
+        ))}
+    </div>
+    <Footer />
+  </div>
+);
+}
+
+const StopCard = ({ title, lines }: { title: string; lines: OutputData[] }) => (
+<div className="bg-white shadow-lg rounded-lg p-3">
+  <div className="border-b-2 border-gray-200">
+    <h3 className="text-xl font-semibold mt-1">{title}</h3>
+  </div>
+  <div className="mt-4">
+    {lines.map(line => (
+      <LineInfo key={line.name} line={line} />
+    ))}
+  </div>
+</div>
+);
+
+const LineInfo = ({ line }: { line: OutputData }) => (
+<div className="mb-1 flex items-center">
+  <div>
+    <div className="font-bold">{line.name}</div>
+    <div className="text-gray-500">{line.towards}</div>
+  </div>
+  <div className="ml-3 mt-5">
+    {line.countdowns?.slice(0, MAX_DISPLAYED_COUNTDOWNS).map((countdown, i) => (
+      <CountdownBadge
+        key={i}
+        countdown={countdown}
+        hasAircon={line.aircon && (AIRCONDITIONED_METROS.includes(line.name) || line.aircon[i])}
+        timePlanned={line.timePlanned && line.timePlanned[i]}
+      />
+    ))}
+  </div>
+</div>
+);
+
+const CountdownBadge = ({ countdown, timePlanned, hasAircon }: { countdown: number; timePlanned?: string, hasAircon?: boolean}) => (
+<span className="relative inline-block mr-2">
+  <span
+    className={`inline-block text-white rounded-full px-2 py-1 text-xs font-bold mr-1 
+    ${countdown < 4 ? "bg-red-600" : "bg-green-600"} 
+    ${countdown < 2 ? "animate-pulse" : ""}
+    ${hasAircon ? "border-2 border-blue-600" : ""}
+    `}
+    title={timePlanned ? timePlanned : ""}
+  >
+    {countdown}
+  </span>
+  {hasAircon && (
+    <span className="absolute -top-2 -right-1 text-xs" title="❄️ A/C available">
+      ❄️
+    </span>
+  )}
+</span>
+);
+
+const Footer = () => (
+<div className="my-10 text-center text-sm text-gray-400">
+  Use URL parameters e.g &apos;/?stopID=123&amp;stopID=124&apos; to specify stop IDs.
+  <br />
+  Find valid stop IDs{" "}
+  <a
+    href="https://till.mabe.at/rbl/"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="text-blue-400 underline"
+  >
+    here
+  </a>
+  .
+  <br />
+  🍪 This website is cookie-free.
+</div>
+);
