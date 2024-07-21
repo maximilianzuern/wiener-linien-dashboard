@@ -183,9 +183,11 @@ const LineInfo = ({ line }: { line: OutputData }) => (
         {line.name} {TRANSPORT_EMOJI_LOOKUP[line.type as keyof typeof TRANSPORT_EMOJI_LOOKUP] ?? ""}
       </div>
       <div className="text-gray-500">
-        {line.towards.charAt(0) +
-          line.towards.slice(1).toLowerCase().split(" ")[0] +
-          line.towards.slice(line.towards.indexOf(" "))}
+        {line.towards.includes(" ")
+          ? line.towards.charAt(0) +
+            line.towards.slice(1).toLowerCase().split(" ")[0] +
+            line.towards.slice(line.towards.indexOf(" "))
+          : line.towards.charAt(0).toUpperCase() + line.towards.slice(1).toLowerCase()}
       </div>
     </div>
     <div className="ml-3 mt-5">
