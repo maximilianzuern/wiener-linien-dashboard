@@ -8,7 +8,7 @@ const API_BASE_URL = "/api/proxy";
 const MAX_COUNTDOWN = 40;
 const MAX_DISPLAYED_COUNTDOWNS = 6;
 const AIRCONDITIONED_METROS = ["U6"];
-const transportEmojiLookup = {
+const TRANSPORT_EMOJI_LOOKUP: Record<string, string> = {
   ptTram: "🚃",
   ptTramWLB: "🚃",
   ptBusCity: "🚌",
@@ -34,18 +34,11 @@ async function fetchData(stopIDs: number[] = []): Promise<Welcome | { error: str
     // Check if the monitor has lines
     const monitor = data.data.monitors.find((monitor) => monitor.lines);
     if (!monitor) {
-      if (data.message.value === "OK") {
-        return { error: "Invalid stopID!" };
-      }
-      return { error: "No valid monitor found in the API response." };
+    return { error: data.message.value === "OK" ? "Invalid stopID!" : "No valid monitor found in the API response." };
     }
-
     return data;
   } catch (error) {
-    if (error instanceof Error) {
-      return { error: `Error: ${error.message}` };
-    }
-    return { error: "An unknown error occurred." };
+    return { error: error instanceof Error ? `Error: ${error.message}` : "An unknown error occurred." };
   }
 }
 
@@ -59,27 +52,23 @@ function parseData(data: Welcome): Record<string, OutputData[]> {
       const { name, towards, type, departures } = line;
       const countdowns = departures?.departure
         .map((departure) => departure.departureTime.countdown)
-        .filter((countdown) => countdown <= MAX_COUNTDOWN);
+        .filter((countdown) => countdown <= MAX_COUNTDOWN) ?? [];
       const timeReal = departures?.departure.map((departure) => {
         const date = new Date(departure.departureTime?.timeReal ?? "");
         return date.toTimeString().split(" ")[0];
-      });
+      }) ?? [];
       const timePlanned = departures?.departure.map((departure) => {
         const date = new Date(departure.departureTime.timePlanned);
         return date.toTimeString().split(" ")[0];
       });
-      const aircon = departures?.departure.map((dep, index) => {
-        if (index < 2) { // For the first two entries (0 and 1)
-          return dep.vehicle?.foldingRampType !== undefined;
-        } else { // From the 3rd entry onwards
-          return undefined;
-        }
-      }) ?? [];
+      const aircon = departures?.departure.map((dep, index) => 
+        index < 2 ? dep.vehicle?.foldingRampType !== undefined : undefined
+      ) ?? [];
 
       if (!result[title]) {
         result[title] = [];
       }
-      result[title].push({ name, towards, type, countdowns, timeReal, timePlanned,  aircon });
+      result[title].push({ name, towards, type, countdowns, timeReal, timePlanned, aircon });
     });
   });
   return Object.fromEntries(Object.entries(result).sort());
@@ -99,19 +88,14 @@ export default function Home() {
         setError(result.error);
       } else {
         setData(result);
+        try {
+          setParsedData(parseData(result));
+        } catch (e) {
+          setError("Real time data not available. 😓🚨");
+        }
       }
     });
   }, []);
-
-  useEffect(() => {
-    if (data) {
-      try {
-        setParsedData(parseData(data));
-      } catch (e) {
-        setError("Real time data not available. 😓🚨");
-      }
-    }
-  }, [data]);
 
   const noParamsMessage = query.length === 0 ? (
     <div className="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 mb-4" role="alert">
@@ -166,7 +150,7 @@ const StopCard = ({ title, lines }: { title: string; lines: OutputData[] }) => (
 const LineInfo = ({ line }: { line: OutputData }) => (
   <div className="mb-1 flex items-center">
     <div>
-      <div className="font-bold">{line.name} {transportEmojiLookup[line.type as keyof typeof transportEmojiLookup] ?? ''}</div>
+      <div className="font-bold">{line.name} {TRANSPORT_EMOJI_LOOKUP[line.type as keyof typeof TRANSPORT_EMOJI_LOOKUP] ?? ''}</div>
       <div className="text-gray-500">{line.towards.charAt(0) + line.towards.slice(1).toLowerCase().split(' ')[0] + line.towards.slice(line.towards.indexOf(' '))}</div>
     </div>
     <div className="ml-3 mt-5">
@@ -201,22 +185,17 @@ const CountdownBadge = ({
 
   const togglePopover = (event: React.MouseEvent) => {
     event.stopPropagation(); // Prevent triggering the document's click event
-    setShowPopover(!showPopover);
+    setShowPopover((previous) => !previous);
   };
 
   useEffect(() => {
-    const handleClickOutside = () => {
-      setShowPopover(false);
-    };
+    const handleClickOutside = () => setShowPopover(false);
 
     if (showPopover) {
       document.addEventListener('click', handleClickOutside);
+      return () => document.removeEventListener('click', handleClickOutside);
     }
-
-    return () => {
-      document.removeEventListener('click', handleClickOutside);
-    };
-  }, [showPopover]); // Effect runs when `showPopover` changes
+  }, [showPopover]);
   const popoverContent = timeReal && timeReal !== "Invalid" ? timeReal : `Planned: ${timePlanned ?? ''}`;
 
   return (
@@ -269,4 +248,4 @@ const Footer = () => (
     <br />
     🍪 This website is cookie-free.
   </div>
-);
+)
