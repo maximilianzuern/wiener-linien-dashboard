@@ -5,7 +5,7 @@ import { useSearchParams } from "next/navigation";
 
 const DEFAULT_STOP_IDS = [4111, 4118];
 const API_BASE_URL = "/api/proxy";
-const MAX_COUNTDOWN = 30;
+const MAX_COUNTDOWN = 40;
 const MAX_DISPLAYED_COUNTDOWNS = 6;
 const AIRCONDITIONED_METROS = ["U6"];
 const transportEmojiLookup = {
@@ -61,16 +61,25 @@ function parseData(data: Welcome): Record<string, OutputData[]> {
         .map((departure) => departure.departureTime.countdown)
         .filter((countdown) => countdown <= MAX_COUNTDOWN);
       const timeReal = departures?.departure.map((departure) => {
-        const date = new Date(departure.departureTime.timeReal);
+        const date = new Date(departure.departureTime?.timeReal ?? "");
         return date.toTimeString().split(" ")[0];
       });
-      const aircon =
-        departures?.departure.map((dep) => dep.vehicle?.foldingRampType !== undefined) ?? [];
+      const timePlanned = departures?.departure.map((departure) => {
+        const date = new Date(departure.departureTime.timePlanned);
+        return date.toTimeString().split(" ")[0];
+      });
+      const aircon = departures?.departure.map((dep, index) => {
+        if (index < 2) { // For the first two entries (0 and 1)
+          return dep.vehicle?.foldingRampType !== undefined;
+        } else { // From the 3rd entry onwards
+          return undefined;
+        }
+      }) ?? [];
 
       if (!result[title]) {
         result[title] = [];
       }
-      result[title].push({ name, towards, type, countdowns, timeReal, aircon });
+      result[title].push({ name, towards, type, countdowns, timeReal, timePlanned,  aircon });
     });
   });
   return Object.fromEntries(Object.entries(result).sort());
@@ -158,7 +167,7 @@ const LineInfo = ({ line }: { line: OutputData }) => (
   <div className="mb-1 flex items-center">
     <div>
       <div className="font-bold">{line.name} {transportEmojiLookup[line.type as keyof typeof transportEmojiLookup] ?? ''}</div>
-      <div className="text-gray-500">{line.towards}</div>
+      <div className="text-gray-500">{line.towards.charAt(0) + line.towards.slice(1).toLowerCase().split(' ')[0] + line.towards.slice(line.towards.indexOf(' '))}</div>
     </div>
     <div className="ml-3 mt-5">
       {line.countdowns?.slice(0, MAX_DISPLAYED_COUNTDOWNS).map((countdown, i) => (
@@ -166,7 +175,9 @@ const LineInfo = ({ line }: { line: OutputData }) => (
           key={i}
           countdown={countdown}
           hasAircon={line.aircon && (AIRCONDITIONED_METROS.includes(line.name) || line.aircon[i])}
-          timePlanned={line.timeReal && line.timeReal[i]}
+          type={line.type}
+          timePlanned={line.timePlanned && line.timePlanned[i]}
+          timeReal={line.timeReal && line.timeReal[i]}
         />
       ))}
     </div>
@@ -176,10 +187,14 @@ const LineInfo = ({ line }: { line: OutputData }) => (
 const CountdownBadge = ({
   countdown,
   timePlanned,
+  timeReal,
+  type,
   hasAircon,
 }: {
   countdown: number;
   timePlanned?: string;
+  timeReal?: string;
+  type?: string;
   hasAircon?: boolean;
 }) => {
   const [showPopover, setShowPopover] = useState(false);
@@ -202,6 +217,7 @@ const CountdownBadge = ({
       document.removeEventListener('click', handleClickOutside);
     };
   }, [showPopover]); // Effect runs when `showPopover` changes
+  const popoverContent = timeReal && timeReal !== "Invalid" ? timeReal : `Planned: ${timePlanned ?? ''}`;
 
   return (
     <span className="relative inline-block mr-2">
@@ -215,16 +231,22 @@ const CountdownBadge = ({
       >
         {countdown}
       </button>
-      {showPopover && timePlanned && (
-        <div className="absolute z-10 px-3 py-2 text-sm font-medium text-white bg-gray-900 rounded-lg bottom-full left-1/2 transform -translate-x-1/2 -translate-y-2">
-          {timePlanned}
+      {showPopover && popoverContent && (
+        <div className="absolute z-10 px-3 py-2 text-sm font-medium text-white bg-gray-900 rounded-lg bottom-full left-1/2 transform -translate-x-1/2 -translate-y-2" role="tooltip">
+          {popoverContent}
           <div className="absolute w-2 h-2 bg-gray-900 transform rotate-45 -bottom-1 left-1/2 -translate-x-1/2"></div>
         </div>
       )}
-      {hasAircon && (
-        <span className="absolute -top-2 -right-1 text-xs" title="❄️ A/C available">
-          ❄️
-        </span>
+      {type === "ptMetro" && hasAircon !== undefined && (
+        hasAircon ? (
+          <span className="absolute -top-2 -right-1 text-xs" title="❄️ A/C available">
+            ❄️
+          </span>
+        ) : (
+          <span className="absolute -top-2 -right-1 text-xs" title="🔥 Hot">
+            🥵
+          </span>
+        )
       )}
     </span>
   );

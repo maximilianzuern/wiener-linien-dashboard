@@ -41,7 +41,7 @@ export interface Departure {
 
 export interface DepartureTime {
   timePlanned: string;
-  timeReal: string;
+  timeReal?: string;
   countdown: number;
 }
 
@@ -98,6 +98,7 @@ export type OutputData = {
   towards: string;
   type: string | undefined;
   countdowns: number[] | undefined;
-  timeReal: string[] | undefined;
-  aircon: boolean[] | undefined;
+  timePlanned: string[] | undefined;
+  timeReal?: string[] | undefined;
+  aircon: (boolean | undefined)[];
 };
