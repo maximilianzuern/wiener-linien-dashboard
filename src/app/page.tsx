@@ -160,25 +160,54 @@ const CountdownBadge = ({
   countdown: number;
   timePlanned?: string;
   hasAircon?: boolean;
-}) => (
-  <span className="relative inline-block mr-2">
-    <span
-      className={`inline-block text-white rounded-full px-2 py-1 text-xs font-bold mr-1 
-    ${countdown < 4 ? "bg-red-600" : "bg-green-600"} 
-    ${countdown < 2 ? "animate-pulse" : ""}
-    ${hasAircon ? "border-2 border-blue-600" : ""}
-    `}
-      title={timePlanned ? timePlanned : ""}
-    >
-      {countdown}
+}) => {
+  const [showPopover, setShowPopover] = useState(false);
+
+  const togglePopover = (event: React.MouseEvent) => {
+    event.stopPropagation(); // Prevent triggering the document's click event
+    setShowPopover(!showPopover);
+  };
+
+  useEffect(() => {
+    const handleClickOutside = () => {
+      setShowPopover(false);
+    };
+
+    if (showPopover) {
+      document.addEventListener('click', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, [showPopover]); // Effect runs when `showPopover` changes
+
+  return (
+    <span className="relative inline-block mr-2">
+      <button
+        onClick={togglePopover}
+        className={`inline-block text-white rounded-full px-2 py-1 text-xs font-bold
+          ${countdown < 4 ? "bg-red-600" : "bg-green-600"} 
+          ${countdown < 2 ? "animate-pulse" : ""}
+          ${hasAircon ? "border-2 border-blue-600" : ""}
+        `}
+      >
+        {countdown}
+      </button>
+      {showPopover && timePlanned && (
+        <div className="absolute z-10 px-3 py-2 text-sm font-medium text-white bg-gray-900 rounded-lg bottom-full left-1/2 transform -translate-x-1/2 -translate-y-2">
+          {timePlanned}
+          <div className="absolute w-2 h-2 bg-gray-900 transform rotate-45 -bottom-1 left-1/2 -translate-x-1/2"></div>
+        </div>
+      )}
+      {hasAircon && (
+        <span className="absolute -top-2 -right-1 text-xs" title="❄️ A/C available">
+          ❄️
+        </span>
+      )}
     </span>
-    {hasAircon && (
-      <span className="absolute -top-2 -right-1 text-xs" title="❄️ A/C available">
-        ❄️
-      </span>
-    )}
-  </span>
-);
+  );
+};
 
 const Footer = () => (
   <div className="my-10 text-center text-sm text-gray-400">
