@@ -76,7 +76,7 @@ function parseData(data: Welcome): Record<string, OutputData[]> {
   return Object.fromEntries(Object.entries(result).sort());
 }
 
-export default function main() {
+export default function Home() {
   const [data, setData] = useState<Welcome | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [parsedData, setParsedData] = useState<Record<string, OutputData[]>>();
