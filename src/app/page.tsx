@@ -76,7 +76,7 @@ function parseData(data: Welcome): Record<string, OutputData[]> {
   return Object.fromEntries(Object.entries(result).sort());
 }
 
-export default function Home() {
+export default function main() {
   const [data, setData] = useState<Welcome | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [parsedData, setParsedData] = useState<Record<string, OutputData[]>>();
@@ -104,6 +104,18 @@ export default function Home() {
     }
   }, [data]);
 
+  const noParamsMessage = query.length === 0 ? (
+    <div className="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 mb-4" role="alert">
+      <p className="font-bold">Using default stops</p>
+      <p>To see departures for specific stops:</p>
+      <ol className="list-decimal list-inside mt-1">
+        <li>Find valid stop IDs <a href="https://till.mabe.at/rbl/" target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">here</a></li>
+        <li>Add to the web address: <span className="font-mono bg-yellow-200 px-1">/?stopID=123</span></li>
+        <li>For multiple stops, use: <span className="font-mono bg-yellow-200 px-1">/?stopID=123&amp;stopID=456</span></li>
+      </ol>
+    </div>
+  ) : null;
+
   if (error) {
     return (
       <div className="container mx-auto p-2">
@@ -117,6 +129,7 @@ export default function Home() {
   return (
     <div className="container mx-auto p-2">
       <h1 className="text-xl font-bold text-center mb-1">Vienna Public Transport</h1>
+      {noParamsMessage}
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3">
         {parsedData &&
           Object.entries(parsedData).map(([title, lines]) => (
@@ -219,8 +232,6 @@ const CountdownBadge = ({
 
 const Footer = () => (
   <div className="my-10 text-center text-sm text-gray-400">
-    Use URL parameters e.g &apos;/?stopID=123&amp;stopID=124&apos; to specify stop IDs.
-    <br />
     Find valid stop IDs{" "}
     <a
       href="https://till.mabe.at/rbl/"
@@ -231,6 +242,8 @@ const Footer = () => (
       here
     </a>
     .
+    <br />
+    e.g &apos;/?stopID=123&amp;stopID=124&apos; to specify stop IDs.
     <br />
     🍪 This website is cookie-free.
   </div>
