@@ -34,11 +34,18 @@ async function fetchData(stopIDs: number[] = []): Promise<Welcome | { error: str
     // Check if the monitor has lines
     const monitor = data.data.monitors.find((monitor) => monitor.lines);
     if (!monitor) {
-    return { error: data.message.value === "OK" ? "Invalid stopID!" : "No valid monitor found in the API response." };
+      return {
+        error:
+          data.message.value === "OK"
+            ? "Invalid stopID!"
+            : "No valid monitor found in the API response.",
+      };
     }
     return data;
   } catch (error) {
-    return { error: error instanceof Error ? `Error: ${error.message}` : "An unknown error occurred." };
+    return {
+      error: error instanceof Error ? `Error: ${error.message}` : "An unknown error occurred.",
+    };
   }
 }
 
@@ -50,20 +57,23 @@ function parseData(data: Welcome): Record<string, OutputData[]> {
 
     monitor.lines.forEach((line) => {
       const { name, towards, type, departures } = line;
-      const countdowns = departures?.departure
-        .map((departure) => departure.departureTime.countdown)
-        .filter((countdown) => countdown <= MAX_COUNTDOWN) ?? [];
-      const timeReal = departures?.departure.map((departure) => {
-        const date = new Date(departure.departureTime?.timeReal ?? "");
-        return date.toTimeString().split(" ")[0];
-      }) ?? [];
+      const countdowns =
+        departures?.departure
+          .map((departure) => departure.departureTime.countdown)
+          .filter((countdown) => countdown <= MAX_COUNTDOWN) ?? [];
+      const timeReal =
+        departures?.departure.map((departure) => {
+          const date = new Date(departure.departureTime?.timeReal ?? "");
+          return date.toTimeString().split(" ")[0];
+        }) ?? [];
       const timePlanned = departures?.departure.map((departure) => {
         const date = new Date(departure.departureTime.timePlanned);
         return date.toTimeString().split(" ")[0];
       });
-      const aircon = departures?.departure.map((dep, index) => 
-        index < 2 ? dep.vehicle?.foldingRampType !== undefined : undefined
-      ) ?? [];
+      const aircon =
+        departures?.departure.map((dep, index) =>
+          index < 2 ? dep.vehicle?.foldingRampType !== undefined : undefined
+        ) ?? [];
 
       if (!result[title]) {
         result[title] = [];
@@ -84,7 +94,7 @@ export default function Home() {
 
   useEffect(() => {
     fetchData(query).then((result) => {
-      if ('error' in result) {
+      if ("error" in result) {
         setError(result.error);
       } else {
         setData(result);
@@ -97,17 +107,37 @@ export default function Home() {
     });
   }, []);
 
-  const noParamsMessage = query.length === 0 ? (
-    <div className="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 mb-4" role="alert">
-      <p className="font-bold">Using default stops</p>
-      <p>To see departures for specific stops:</p>
-      <ol className="list-decimal list-inside mt-1">
-        <li>Find valid stop IDs <a href="https://till.mabe.at/rbl/" target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">here</a></li>
-        <li>Add to the web address: <span className="font-mono bg-yellow-200 px-1">/?stopID=123</span></li>
-        <li>For multiple stops, use: <span className="font-mono bg-yellow-200 px-1">/?stopID=123&amp;stopID=456</span></li>
-      </ol>
-    </div>
-  ) : null;
+  const noParamsMessage =
+    query.length === 0 ? (
+      <div
+        className="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 mb-4"
+        role="alert"
+      >
+        <p className="font-bold">Using default stops</p>
+        <p>To see departures for specific stops:</p>
+        <ol className="list-decimal list-inside mt-1">
+          <li>
+            Find valid stop IDs{" "}
+            <a
+              href="https://till.mabe.at/rbl/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-600 underline"
+            >
+              here
+            </a>
+          </li>
+          <li>
+            Add to the web address:{" "}
+            <span className="font-mono bg-yellow-200 px-1">/?stopID=123</span>
+          </li>
+          <li>
+            For multiple stops, use:{" "}
+            <span className="font-mono bg-yellow-200 px-1">/?stopID=123&amp;stopID=456</span>
+          </li>
+        </ol>
+      </div>
+    ) : null;
 
   if (error) {
     return (
@@ -150,8 +180,14 @@ const StopCard = ({ title, lines }: { title: string; lines: OutputData[] }) => (
 const LineInfo = ({ line }: { line: OutputData }) => (
   <div className="mb-1 flex items-center">
     <div>
-      <div className="font-bold">{line.name} {TRANSPORT_EMOJI_LOOKUP[line.type as keyof typeof TRANSPORT_EMOJI_LOOKUP] ?? ''}</div>
-      <div className="text-gray-500">{line.towards.charAt(0) + line.towards.slice(1).toLowerCase().split(' ')[0] + line.towards.slice(line.towards.indexOf(' '))}</div>
+      <div className="font-bold">
+        {line.name} {TRANSPORT_EMOJI_LOOKUP[line.type as keyof typeof TRANSPORT_EMOJI_LOOKUP] ?? ""}
+      </div>
+      <div className="text-gray-500">
+        {line.towards.charAt(0) +
+          line.towards.slice(1).toLowerCase().split(" ")[0] +
+          line.towards.slice(line.towards.indexOf(" "))}
+      </div>
     </div>
     <div className="ml-3 mt-5">
       {line.countdowns?.slice(0, MAX_DISPLAYED_COUNTDOWNS).map((countdown, i) => (
@@ -192,11 +228,12 @@ const CountdownBadge = ({
     const handleClickOutside = () => setShowPopover(false);
 
     if (showPopover) {
-      document.addEventListener('click', handleClickOutside);
-      return () => document.removeEventListener('click', handleClickOutside);
+      document.addEventListener("click", handleClickOutside);
+      return () => document.removeEventListener("click", handleClickOutside);
     }
   }, [showPopover]);
-  const popoverContent = timeReal && timeReal !== "Invalid" ? timeReal : `Planned: ${timePlanned ?? ''}`;
+  const popoverContent =
+    timeReal && timeReal !== "Invalid" ? timeReal : `Planned: ${timePlanned ?? ""}`;
 
   return (
     <span className="relative inline-block mr-2">
@@ -211,13 +248,17 @@ const CountdownBadge = ({
         {countdown}
       </button>
       {showPopover && popoverContent && (
-        <div className="absolute z-10 px-3 py-2 text-sm font-medium text-white bg-gray-900 rounded-lg bottom-full left-1/2 transform -translate-x-1/2 -translate-y-2" role="tooltip">
+        <div
+          className="absolute z-10 px-3 py-2 text-sm font-medium text-white bg-gray-900 rounded-lg bottom-full left-1/2 transform -translate-x-1/2 -translate-y-2"
+          role="tooltip"
+        >
           {popoverContent}
           <div className="absolute w-2 h-2 bg-gray-900 transform rotate-45 -bottom-1 left-1/2 -translate-x-1/2"></div>
         </div>
       )}
-      {type === "ptMetro" && hasAircon !== undefined && (
-        hasAircon ? (
+      {type === "ptMetro" &&
+        hasAircon !== undefined &&
+        (hasAircon ? (
           <span className="absolute -top-2 -right-1 text-xs" title="❄️ A/C available">
             ❄️
           </span>
@@ -225,8 +266,7 @@ const CountdownBadge = ({
           <span className="absolute -top-2 -right-1 text-xs" title="🔥 Hot">
             🥵
           </span>
-        )
-      )}
+        ))}
     </span>
   );
 };
@@ -248,4 +288,4 @@ const Footer = () => (
     <br />
     🍪 This website is cookie-free.
   </div>
-)
+);
