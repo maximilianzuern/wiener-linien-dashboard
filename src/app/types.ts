@@ -41,8 +41,8 @@ export interface Departure {
 
 export interface DepartureTime {
   timePlanned: string;
+  timeReal: string;
   countdown: number;
-  timeReal?: string;
 }
 
 export interface Vehicle {
@@ -96,7 +96,8 @@ export interface Message {
 export type OutputData = {
   name: string;
   towards: string;
+  type: string | undefined;
   countdowns: number[] | undefined;
-  timePlanned: string[] | undefined;
+  timeReal: string[] | undefined;
   aircon: boolean[] | undefined;
 };

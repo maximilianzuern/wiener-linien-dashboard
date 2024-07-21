@@ -8,6 +8,14 @@ const API_BASE_URL = "/api/proxy";
 const MAX_COUNTDOWN = 30;
 const MAX_DISPLAYED_COUNTDOWNS = 6;
 const AIRCONDITIONED_METROS = ["U6"];
+const transportEmojiLookup = {
+  ptTram: "🚃",
+  ptTramWLB: "🚃",
+  ptBusCity: "🚌",
+  ptBusNight: "🚌",
+  ptMetro: "🚇",
+  ptTrainS: "🚆",
+};
 
 // to get the stopID -> https://till.mabe.at/rbl/
 async function fetchData(stopIDs: number[] = []): Promise<Welcome | { error: string }> {
@@ -48,12 +56,12 @@ function parseData(data: Welcome): Record<string, OutputData[]> {
     const title = monitor.locationStop.properties.title;
 
     monitor.lines.forEach((line) => {
-      const { name, towards, departures } = line;
+      const { name, towards, type, departures } = line;
       const countdowns = departures?.departure
         .map((departure) => departure.departureTime.countdown)
         .filter((countdown) => countdown <= MAX_COUNTDOWN);
-      const timePlanned = departures?.departure.map((departure) => {
-        const date = new Date(departure.departureTime.timePlanned);
+      const timeReal = departures?.departure.map((departure) => {
+        const date = new Date(departure.departureTime.timeReal);
         return date.toTimeString().split(" ")[0];
       });
       const aircon =
@@ -62,7 +70,7 @@ function parseData(data: Welcome): Record<string, OutputData[]> {
       if (!result[title]) {
         result[title] = [];
       }
-      result[title].push({ name, towards, countdowns, timePlanned, aircon });
+      result[title].push({ name, towards, type, countdowns, timeReal, aircon });
     });
   });
   return Object.fromEntries(Object.entries(result).sort());
@@ -136,7 +144,7 @@ const StopCard = ({ title, lines }: { title: string; lines: OutputData[] }) => (
 const LineInfo = ({ line }: { line: OutputData }) => (
   <div className="mb-1 flex items-center">
     <div>
-      <div className="font-bold">{line.name}</div>
+      <div className="font-bold">{line.name} {transportEmojiLookup[line.type as keyof typeof transportEmojiLookup] ?? ''}</div>
       <div className="text-gray-500">{line.towards}</div>
     </div>
     <div className="ml-3 mt-5">
@@ -145,7 +153,7 @@ const LineInfo = ({ line }: { line: OutputData }) => (
           key={i}
           countdown={countdown}
           hasAircon={line.aircon && (AIRCONDITIONED_METROS.includes(line.name) || line.aircon[i])}
-          timePlanned={line.timePlanned && line.timePlanned[i]}
+          timePlanned={line.timeReal && line.timeReal[i]}
         />
       ))}
     </div>
