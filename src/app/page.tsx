@@ -19,8 +19,7 @@ const TRANSPORT_EMOJI_LOOKUP: Record<string, string> = {
 
 // to get the stopID -> https://till.mabe.at/rbl/
 async function fetchData(stopIDs: number[] = []): Promise<Welcome | { error: string }> {
-  const validStopIDs =
-    stopIDs.length > 0 && stopIDs.every((id) => !isNaN(id)) ? stopIDs : DEFAULT_STOP_IDS;
+  const validStopIDs = stopIDs.length > 0 ? stopIDs : DEFAULT_STOP_IDS;
   const query = new URLSearchParams(validStopIDs.map((id) => ["stopID", id.toString()])).toString();
 
   try {
@@ -31,16 +30,16 @@ async function fetchData(stopIDs: number[] = []): Promise<Welcome | { error: str
 
     const data: Welcome = await res.json();
 
-    // Check if the monitor has lines
-    const monitor = data.data.monitors.find((monitor) => monitor.lines);
-    if (!monitor) {
+    if (data.data?.monitors.length === 0 && data.message.value === "OK") {
       return {
-        error:
-          data.message.value === "OK"
-            ? "Invalid stopID!"
-            : "No valid monitor found in the API response.",
+        error: "No departures found for the given stopID.",
+      };
+    } else if (data.message.value !== "OK") {
+      return {
+        error: `API response: ${data.message.value}`,
       };
     }
+
     return data;
   } catch (error) {
     return {
