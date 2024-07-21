@@ -1,22 +1,32 @@
+export type OutputData = {
+  name: string;
+  towards: string;
+  type: string | undefined;
+  countdowns: number[] | undefined;
+  timePlanned: string[] | undefined;
+  timeReal?: string[] | undefined;
+  aircon: (boolean | undefined)[];
+};
+
 export interface Welcome {
   data: Data;
   message: Message;
 }
 
-export interface Data {
+interface Data {
   message: any;
   monitors: Monitor[];
 }
 
-export interface Monitor {
+interface Monitor {
   locationStop: LocationStop;
   lines: Line[];
   attributes: MonitorAttributes;
 }
 
-export interface MonitorAttributes {}
+interface MonitorAttributes {}
 
-export interface Line {
+interface Line {
   name: string;
   towards: string;
   direction?: string;
@@ -30,22 +40,22 @@ export interface Line {
   lineId?: number;
 }
 
-export interface Departures {
+interface Departures {
   departure: Departure[];
 }
 
-export interface Departure {
+interface Departure {
   departureTime: DepartureTime;
   vehicle: Vehicle;
 }
 
-export interface DepartureTime {
+interface DepartureTime {
   timePlanned: string;
   timeReal?: string;
   countdown: number;
 }
 
-export interface Vehicle {
+interface Vehicle {
   name: string;
   towards: string;
   direction: string;
@@ -61,18 +71,18 @@ export interface Vehicle {
   linienId: number;
 }
 
-export interface LocationStop {
+interface LocationStop {
   type: string;
   geometry: Geometry;
   properties: Properties;
 }
 
-export interface Geometry {
+interface Geometry {
   type: string;
   coordinates: number[];
 }
 
-export interface Properties {
+interface Properties {
   name: string;
   title: string;
   municipality: string;
@@ -83,22 +93,12 @@ export interface Properties {
   attributes: PropertiesAttributes;
 }
 
-export interface PropertiesAttributes {
+interface PropertiesAttributes {
   rbl: number;
 }
 
-export interface Message {
+interface Message {
   value: string;
   messageCode: number;
   serverTime: string;
 }
-
-export type OutputData = {
-  name: string;
-  towards: string;
-  type: string | undefined;
-  countdowns: number[] | undefined;
-  timePlanned: string[] | undefined;
-  timeReal?: string[] | undefined;
-  aircon: (boolean | undefined)[];
-};
