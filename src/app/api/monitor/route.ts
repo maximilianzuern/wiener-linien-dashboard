@@ -3,33 +3,35 @@ import type { NextRequest } from "next/server";
 
 export const runtime = "edge";
 
+const API_BASE_URL = "https://www.wienerlinien.at/ogd_realtime/monitor";
+
 export async function GET(request: NextRequest) {
+  try {
+    const params = request.nextUrl.searchParams.getAll("stopID");
+    const query = params.map((id) => `stopId=${id}`).join("&");
 
-  // In the edge runtime you can use Bindings that are available in your application
-  // (for more details see:
-  //    - https://developers.cloudflare.com/pages/framework-guides/deploy-a-nextjs-site/#use-bindings-in-your-nextjs-application
-  //    - https://developers.cloudflare.com/pages/functions/bindings/
-  // )
-  //
-  // KV Example:
-  // const myKv = getRequestContext().env.MY_KV_NAMESPACE
-  // await myKv.put('suffix', ' from a KV store!')
-  // const suffix = await myKv.get('suffix')
-  // responseText += suffix
+    const response = await fetch(`${API_BASE_URL}?${query}`, {
+      method: "GET",
+      headers: { "Accept-Language": "de" },
+      next: { revalidate: 5 }, // Cache for 5 seconds
+    });
 
-  const url = new URL(request.url);
-  const params = url.searchParams.getAll("stopID");
-  const query = params.map((id) => `stopId=${id}`).join("&");
+    // if (!response.ok) {
+    //   return new Response(JSON.stringify({ error: "Fetch failed" }), {
+    //     status: response.status,
+    //     statusText: response.statusText,
+    //     headers: response.headers,
+    //   });
+    // }
 
-  const headers = { "Accept-Language": "de" };
-  const response = await fetch(
-    "https://www.wienerlinien.at/ogd_realtime/monitor?" + query,
-    {method: "GET", headers}
-  );
+    return new Response(response.body, {
+      status: response.status,
+      statusText: response.statusText,
+      headers: response.headers,
+    });
 
-  return new Response(response.body, {
-    status: response.status,
-    statusText: response.statusText,
-    headers: response.headers,
-  });
+  } catch (error) {
+    return new Response(JSON.stringify({ error: "Internal Server Error" }), { status: 500 });
+  }
+
 }
