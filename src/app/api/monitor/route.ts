@@ -1,5 +1,6 @@
 import type { NextRequest } from "next/server";
 // import { getRequestContext } from "@cloudflare/next-on-pages";
+// const { env, cf, ctx } = getRequestContext();
 
 export const runtime = "edge";
 
@@ -13,7 +14,6 @@ export async function GET(request: NextRequest) {
     const response = await fetch(`${API_BASE_URL}?${query}`, {
       method: "GET",
       headers: { "Accept-Language": "de" },
-      next: { revalidate: 5 }, // Cache for 5 seconds
     });
 
     // checking !response.ok in page.tsx
