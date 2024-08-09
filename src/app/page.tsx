@@ -84,7 +84,6 @@ function parseData(data: Welcome): Record<string, OutputData[]> {
 }
 
 export default function Home() {
-  const [data, setData] = useState<Welcome | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [parsedData, setParsedData] = useState<Record<string, OutputData[]>>();
 
@@ -96,7 +95,6 @@ export default function Home() {
       if ("error" in result) {
         setError(result.error);
       } else {
-        setData(result);
         try {
           setParsedData(parseData(result));
         } catch (e) {
