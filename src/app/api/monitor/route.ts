@@ -16,6 +16,8 @@ export async function GET(request: NextRequest) {
       next: { revalidate: 5 }, // Cache for 5 seconds
     });
 
+    // checking !response.ok in page.tsx
+
     // if (!response.ok) {
     //   return new Response(JSON.stringify({ error: "Fetch failed" }), {
     //     status: response.status,
