@@ -90,18 +90,7 @@ export default function Home() {
   const searchParams = useSearchParams();
   // validate the searchParams
   const keys = Array.from(searchParams.keys());
-  const invalidKey = keys.some(key => key.toLowerCase() !== "stopid");
-
-  if (invalidKey) {
-    return (
-      <div className="container mx-auto p-2">
-        <h1 className="text-xl font-bold text-center mb-2">Vienna Public Transport</h1>
-        <div className="text-center text-red-500 font-semibold my-10">Error in URL: {searchParams.toString()}</div>
-        <div className="text-center text-red-500 font-semibold my-10">Please provide a valid stopID.</div>
-        <Footer />
-      </div>
-    );
-  }
+  const invalidKey = keys.some((key) => key.toLowerCase() !== "stopid");
 
   const query = Array.from(searchParams.values()).map(Number);
 
@@ -118,6 +107,21 @@ export default function Home() {
       }
     });
   }, []);
+
+  if (invalidKey) {
+    return (
+      <div className="container mx-auto p-2">
+        <h1 className="text-xl font-bold text-center mb-2">Vienna Public Transport</h1>
+        <div className="text-center text-red-500 font-semibold my-10">
+          Error in URL: {searchParams.toString()}
+        </div>
+        <div className="text-center text-red-500 font-semibold my-10">
+          Please provide a valid stopID.
+        </div>
+        <Footer />
+      </div>
+    );
+  }
 
   const noParamsMessage =
     query.length === 0 ? (

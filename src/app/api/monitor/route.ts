@@ -31,9 +31,7 @@ export async function GET(request: NextRequest) {
       statusText: response.statusText,
       headers: response.headers,
     });
-
   } catch (error) {
     return new Response(JSON.stringify({ error: "Internal Server Error" }), { status: 500 });
   }
-
 }
