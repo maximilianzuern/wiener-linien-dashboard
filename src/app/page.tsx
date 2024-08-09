@@ -88,6 +88,21 @@ export default function Home() {
   const [parsedData, setParsedData] = useState<Record<string, OutputData[]>>();
 
   const searchParams = useSearchParams();
+  // validate the searchParams
+  const keys = Array.from(searchParams.keys());
+  const invalidKey = keys.some(key => key.toLowerCase() !== "stopid");
+
+  if (invalidKey) {
+    return (
+      <div className="container mx-auto p-2">
+        <h1 className="text-xl font-bold text-center mb-2">Vienna Public Transport</h1>
+        <div className="text-center text-red-500 font-semibold my-10">Error in URL: {searchParams.toString()}</div>
+        <div className="text-center text-red-500 font-semibold my-10">Please provide a valid stopID.</div>
+        <Footer />
+      </div>
+    );
+  }
+
   const query = Array.from(searchParams.values()).map(Number);
 
   useEffect(() => {
@@ -272,7 +287,7 @@ const CountdownBadge = ({
 
 const Footer = () => (
   <div className="my-10 text-center text-sm text-gray-400">
-    Find valid stop IDs{" "}
+    Find valid stopIDs{" "}
     <a
       href="https://till.mabe.at/rbl/"
       target="_blank"
@@ -283,7 +298,7 @@ const Footer = () => (
     </a>
     .
     <br />
-    e.g &apos;/?stopID=123&amp;stopID=124&apos; to specify stop IDs.
+    e.g &apos;/?stopID=123&amp;stopID=124&apos; to specify stopIDs.
     <br />
     🍪 This website is cookie-free.
   </div>
