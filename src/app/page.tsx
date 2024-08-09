@@ -4,7 +4,7 @@ import type { Welcome, OutputData } from "./types";
 import { useSearchParams } from "next/navigation";
 
 const DEFAULT_STOP_IDS = [4111, 4118];
-const API_BASE_URL = "/api/proxy";
+const API_BASE_URL = "/api/monitor";
 const MAX_COUNTDOWN = 40;
 const MAX_DISPLAYED_COUNTDOWNS = 6;
 const AIRCONDITIONED_METROS = ["U6"];
