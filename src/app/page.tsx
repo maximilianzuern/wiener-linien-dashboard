@@ -18,10 +18,13 @@ const TRANSPORT_EMOJI_LOOKUP: Record<string, string> = {
 };
 
 // to get the stopID -> https://till.mabe.at/rbl/
-async function fetchData(stopIDs: number[] = []): Promise<Welcome | { error: string }> {
+async function fetchData(stopIDs: number[] = [], invalidKey: boolean): Promise<Welcome | { error: string }> {
   const validStopIDs = stopIDs.length > 0 ? stopIDs : DEFAULT_STOP_IDS;
   const query = new URLSearchParams(validStopIDs.map((id) => ["stopID", id.toString()])).toString();
-
+  if (invalidKey) {
+    return {error: "Invalid stopID key in URL."};
+  }
+  
   try {
     const res = await fetch(`${API_BASE_URL}?${query}`);
     if (!res.ok) {
@@ -95,7 +98,7 @@ export default function Home() {
   const query = Array.from(searchParams.values()).map(Number);
 
   useEffect(() => {
-    fetchData(query).then((result) => {
+    fetchData(query, invalidKey).then((result) => {
       if ("error" in result) {
         setError(result.error);
       } else {
