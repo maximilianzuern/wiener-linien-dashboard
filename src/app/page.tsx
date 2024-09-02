@@ -21,7 +21,7 @@ type FetchResult = Record<string, OutputData[]> | { error: string };
 
 // to get the stopID -> https://till.mabe.at/rbl/
 async function fetchData(stopIDs: number[]): Promise<FetchResult> {
-  const query = new URLSearchParams(stopIDs.map(id => ["stopID", id.toString()])).toString();
+  const query = new URLSearchParams(stopIDs.map((id) => ["stopID", id.toString()])).toString();
   try {
     const res = await fetch(`${API_BASE_URL}?${query}`);
     return await res.json();
@@ -40,7 +40,7 @@ export default function Home() {
   }, [searchParams]);
 
   // validate the searchParams
-  const invalidKey = Array.from(searchParams.keys()).some(key => key.toLowerCase() !== "stopid");
+  const invalidKey = Array.from(searchParams.keys()).some((key) => key.toLowerCase() !== "stopid");
   const query = Array.from(searchParams.values()).map(Number);
 
   useEffect(() => {
@@ -50,10 +50,8 @@ export default function Home() {
     }
   }, [getStopIDs, invalidKey]);
 
-  if (invalidKey) return <ErrorMessage message="Invalid stopID key in URL." 
-  />;
-  if (data?.error) return <ErrorMessage message={data.error.toString()} 
-  />;
+  if (invalidKey) return <ErrorMessage message="Invalid stopID key in URL." />;
+  if (data?.error) return <ErrorMessage message={data.error.toString()} />;
 
   return (
     <div className="container mx-auto p-2">
@@ -87,9 +85,7 @@ const LineInfo = ({ line }: { line: OutputData }) => (
       <div className="font-bold">
         {line.name} {TRANSPORT_EMOJI_LOOKUP[line.type as keyof typeof TRANSPORT_EMOJI_LOOKUP] ?? ""}
       </div>
-      <div className="text-gray-500">
-          {formatTowards(line.towards)}
-      </div>
+      <div className="text-gray-500">{formatTowards(line.towards)}</div>
     </div>
     <div className="ml-3 mt-5">
       {line.countdowns?.slice(0, MAX_DISPLAYED_COUNTDOWNS).map((countdown, i) => (
@@ -132,7 +128,10 @@ const CountdownBadge = ({
   return (
     <span className="relative inline-block mr-2">
       <button
-        onClick={(e) => { e.stopPropagation(); setShowPopover(!showPopover); }}
+        onClick={(e) => {
+          e.stopPropagation();
+          setShowPopover(!showPopover);
+        }}
         className={`inline-block text-white rounded-full px-2 py-1 text-xs font-bold
           ${countdown < 4 ? "bg-red-600" : "bg-green-600"} 
           ${countdown < 2 ? "animate-pulse" : ""}
@@ -142,19 +141,19 @@ const CountdownBadge = ({
         {countdown}
       </button>
       {showPopover && (timeReal || timePlanned) && (
-        <div
-        className="absolute z-10 px-3 py-2 text-sm font-medium text-white bg-gray-900 rounded-lg bottom-full left-1/2 transform -translate-x-1/2 -translate-y-2"
-        >
-        {timeReal && timeReal !== "Invalid" ? timeReal : `Planned: ${timePlanned ?? ""}`}
+        <div className="absolute z-10 px-3 py-2 text-sm font-medium text-white bg-gray-900 rounded-lg bottom-full left-1/2 transform -translate-x-1/2 -translate-y-2">
+          {timeReal && timeReal !== "Invalid" ? timeReal : `Planned: ${timePlanned ?? ""}`}
           <div className="absolute w-2 h-2 bg-gray-900 transform rotate-45 -bottom-1 left-1/2 -translate-x-1/2"></div>
         </div>
       )}
-      {type === "ptMetro" &&
-        hasAircon !== null && (
-        <span className="absolute -top-2 -right-1 text-xs" title={hasAircon ? "❄️ A/C available" : "🥵 No A/C"}>
+      {type === "ptMetro" && hasAircon !== null && (
+        <span
+          className="absolute -top-2 -right-1 text-xs"
+          title={hasAircon ? "❄️ A/C available" : "🥵 No A/C"}
+        >
           {hasAircon ? "❄️" : "🥵"}
-          </span>
-        )}
+        </span>
+      )}
     </span>
   );
 };
@@ -191,9 +190,24 @@ const DefaultStopsMessage = () => (
     <p className="font-bold">Using default stops</p>
     <p>To see departures for specific stops:</p>
     <ol className="list-decimal list-inside mt-1">
-      <li>Find valid stop IDs <a href="https://till.mabe.at/rbl/" target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">here</a></li>
-      <li>Add to the web address: <span className="font-mono bg-yellow-200 px-1">/?stopID=4111</span></li>
-      <li>For multiple stops, use: <span className="font-mono bg-yellow-200 px-1">/?stopID=4111&amp;stopID=4118</span></li>
+      <li>
+        Find valid stop IDs{" "}
+        <a
+          href="https://till.mabe.at/rbl/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-blue-600 underline"
+        >
+          here
+        </a>
+      </li>
+      <li>
+        Add to the web address: <span className="font-mono bg-yellow-200 px-1">/?stopID=4111</span>
+      </li>
+      <li>
+        For multiple stops, use:{" "}
+        <span className="font-mono bg-yellow-200 px-1">/?stopID=4111&amp;stopID=4118</span>
+      </li>
     </ol>
   </div>
 );
