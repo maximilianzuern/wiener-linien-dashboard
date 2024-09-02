@@ -182,16 +182,11 @@ const CountdownBadge = ({
         </div>
       )}
       {type === "ptMetro" &&
-        hasAircon !== null &&
-        (hasAircon ? (
-          <span className="absolute -top-2 -right-1 text-xs" title="❄️ A/C available">
-            ❄️
+        hasAircon !== null && (
+        <span className="absolute -top-2 -right-1 text-xs" title={hasAircon ? "❄️ A/C available" : "🥵 No A/C"}>
+          {hasAircon ? "❄️" : "🥵"}
           </span>
-        ) : (
-          <span className="absolute -top-2 -right-1 text-xs" title="🔥 Hot">
-            🥵
-          </span>
-        ))}
+        )}
     </span>
   );
 };
