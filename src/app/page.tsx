@@ -121,8 +121,8 @@ const LineInfo = ({ line }: { line: OutputData }) => (
           countdown={countdown}
           hasAircon={line.aircon && (AIRCONDITIONED_METROS.includes(line.name) || line.aircon[i])}
           type={line.type}
-          timePlanned={line.timePlanned && line.timePlanned[i]}
-          timeReal={line.timeReal && line.timeReal[i]}
+          timePlanned={line.timePlanned?.[i]}
+          timeReal={line.timeReal?.[i]}
         />
       ))}
     </div>
