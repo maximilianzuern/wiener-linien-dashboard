@@ -20,13 +20,8 @@ const TRANSPORT_EMOJI_LOOKUP: Record<string, string> = {
 type FetchResult = Record<string, OutputData[]> | { error: string };
 
 // to get the stopID -> https://till.mabe.at/rbl/
-async function fetchData(stopIDs: number[] = [], invalidKey: boolean): Promise<FetchResult> {
-// async function fetchData(stopIDs: number[]): Promise<FetchResult> {
+async function fetchData(stopIDs: number[] = []): Promise<FetchResult> {
   const query = new URLSearchParams(stopIDs.map(id => ["stopID", id.toString()])).toString();
-  if (invalidKey) {
-    return {error: "Invalid stopID key in URL."};
-  }
-  
   try {
     const res = await fetch(`${API_BASE_URL}?${query}`);
     return await res.json();
@@ -36,44 +31,31 @@ async function fetchData(stopIDs: number[] = [], invalidKey: boolean): Promise<F
 }
 
 export default function Home() {
-  const [fetchedError, setError] = useState<string | OutputData[] | null>(null);
   const [data, setData] = useState<FetchResult | null>(null);
-
   const searchParams = useSearchParams();
+
   const getStopIDs = useCallback(() => {
     const params = searchParams.getAll("stopID");
     return params.length > 0 ? params.map(Number) : DEFAULT_STOP_IDS;
   }, [searchParams]);
 
   // validate the searchParams
-  // const keys = Array.from(searchParams.keys());
-  // const invalidKey = keys.some((key) => key.toLowerCase() !== "stopid");
   const invalidKey = Array.from(searchParams.keys()).some(key => key.toLowerCase() !== "stopid");
   const query = Array.from(searchParams.values()).map(Number);
 
   useEffect(() => {
-    const stopIDs = getStopIDs();
-    fetchData(stopIDs, invalidKey).then((result) => {
-      if (result.error) {
-        setError(result.error);
-      } else {
-        setData(result);
-      }
-    });
-  }, []);
-
-  // useEffect(() => {
-  //   if (!invalidKey) {
-  //     fetchData(getStopIDs()).then(setData);
-  //   }
-  // }, [getStopIDs, invalidKey]);
+    if (!invalidKey) {
+      const stopIDs = getStopIDs();
+      fetchData(stopIDs).then(setData);
+    }
+  }, [getStopIDs, invalidKey]);
 
   if (invalidKey) {
   return <ErrorMessage message="Invalid stopID key in URL." />;
   }
 
-  if (fetchedError) {
-    return <ErrorMessage message={fetchedError.toString()} />;
+  if (data?.error) {
+    return <ErrorMessage message={data.error.toString()} />;
   }
 
   return (
