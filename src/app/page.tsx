@@ -29,7 +29,7 @@ function PageContent() {
       const stopIDs = getStopIDs();
       fetchData(stopIDs).then(setData);
     }
-  }, [getStopIDs, invalidKey]);
+  }, []);
 
   if (invalidKey) return <ErrorMessage message="Invalid stopID key in URL." />;
   if (data?.error) return <ErrorMessage message={data.error.toString()} />;
