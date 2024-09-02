@@ -1,5 +1,6 @@
 "use client";
 
+import { Suspense } from "react";
 import { useCallback, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import type { FetchResult } from "@/types";
@@ -10,7 +11,7 @@ import DefaultStopsMessage from "@/components/DefaultStopsMessage";
 import StopCard from "@/components/StopCard";
 import Footer from "@/components/Footer";
 
-export default function Home() {
+function PageContent() {
   const [data, setData] = useState<FetchResult | null>(null);
   const searchParams = useSearchParams();
 
@@ -45,5 +46,13 @@ export default function Home() {
       </div>
       <Footer />
     </div>
+  );
+}
+
+export default function Page() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <PageContent />
+    </Suspense>
   );
 }
