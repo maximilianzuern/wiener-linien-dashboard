@@ -20,7 +20,7 @@ const TRANSPORT_EMOJI_LOOKUP: Record<string, string> = {
 type FetchResult = Record<string, OutputData[]> | { error: string };
 
 // to get the stopID -> https://till.mabe.at/rbl/
-async function fetchData(stopIDs: number[] = []): Promise<FetchResult> {
+async function fetchData(stopIDs: number[]): Promise<FetchResult> {
   const query = new URLSearchParams(stopIDs.map(id => ["stopID", id.toString()])).toString();
   try {
     const res = await fetch(`${API_BASE_URL}?${query}`);
@@ -50,13 +50,10 @@ export default function Home() {
     }
   }, [getStopIDs, invalidKey]);
 
-  if (invalidKey) {
-  return <ErrorMessage message="Invalid stopID key in URL." />;
-  }
-
-  if (data?.error) {
-    return <ErrorMessage message={data.error.toString()} />;
-  }
+  if (invalidKey) return <ErrorMessage message="Invalid stopID key in URL." 
+  />;
+  if (data?.error) return <ErrorMessage message={data.error.toString()} 
+  />;
 
   return (
     <div className="container mx-auto p-2">
@@ -75,9 +72,7 @@ export default function Home() {
 
 const StopCard = ({ title, lines }: { title: string; lines: OutputData[] }) => (
   <div className="bg-white shadow-lg rounded-lg p-3">
-    <div className="border-b-2 border-gray-200">
-      <h3 className="text-xl font-semibold mt-1">{title}</h3>
-    </div>
+    <h3 className="text-xl font-semibold mt-1 border-b-2 border-gray-200">{title}</h3>
     <div className="mt-4">
       {lines.map((line) => (
         <LineInfo key={line.name} line={line} />
