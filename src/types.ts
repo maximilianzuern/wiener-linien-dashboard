@@ -13,6 +13,8 @@ export interface Welcome {
   message: Message;
 }
 
+export type FetchResult = Record<string, OutputData[]> | { error: string };
+
 interface Data {
   message: any;
   monitors: Monitor[];
