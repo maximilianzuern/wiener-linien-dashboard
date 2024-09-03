@@ -15,11 +15,11 @@ export function parseData(data: Welcome, MAX_COUNTDOWN: number): Record<string, 
       const timeReal =
         departures?.departure.map((departure) => {
           const date = new Date(departure.departureTime?.timeReal ?? "");
-          return date.toLocaleTimeString("de-AT");
+          return date.toLocaleTimeString("de-AT", { timeZone: "Europe/Vienna" });
         }) ?? [];
       const timePlanned = departures?.departure.map((departure) => {
         const date = new Date(departure.departureTime.timePlanned);
-        return date.toLocaleTimeString("de-AT");
+        return date.toLocaleTimeString("de-AT", { timeZone: "Europe/Vienna" });
       });
       const aircon =
         departures?.departure.map((dep, index) =>
