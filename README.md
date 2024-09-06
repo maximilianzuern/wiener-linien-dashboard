@@ -2,6 +2,10 @@
 
 This is a [Next.js](https://nextjs.org/) project that provides real-time public transport information for Vienna using the Wiener Linien API.
 
+The Wiener Linien API was reverse engineered to provide details about the air conditioning in metro lines.
+
+<img width="600" alt="Screenshot of the Dashboard" src="https://github.com/user-attachments/assets/575e0637-e15e-4f19-8ba1-2e70b755d9af">
+
 Built with:
 - Next.js 14
 - TailwindCSS
