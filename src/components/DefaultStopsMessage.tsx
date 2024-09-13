@@ -30,7 +30,7 @@ const DefaultStopsMessage = () => (
         </a>
       </li>
       <li>
-        Add them to the URL like this:{" "}
+        Add them to the URL:{" "}
         <code className="bg-yellow-200 px-1 rounded">
           <Link
             href="/?stopID=4111"
