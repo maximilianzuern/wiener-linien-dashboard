@@ -13,11 +13,17 @@ export async function GET(request: NextRequest) {
 
   try {
     const response = await fetch(`${API_BASE_URL}?${query}`, {
-      headers: { "Accept-Language": "de" },
+      headers: {
+        "Accept-Language": "de,en-US;q=0.7,en;q=0.3",
+        "Accept":
+          "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/png,image/svg+xml,*/*;q=0.8",
+      },
     });
 
     if (!response.ok) {
-      throw new Error(`Wiener Linien API request failed with status ${response.status}`);
+      throw new Error(
+        `Wiener Linien API request failed: ${response.status}: ${response.statusText}`
+      );
     }
 
     const data: Welcome = await response.json();
