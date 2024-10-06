@@ -1,0 +1,7 @@
+name: wienerliniendashboard
+services:
+  wienerliniendashboard:
+    container_name: wienerliniendashboard
+    image: wienerliniendashboard:latest
+    ports:
+      - 3000:3000
