@@ -1,10 +1,10 @@
 # Wiener Linien Dashboard
 
-A compact React Router v7 dashboard for Vienna public transport departures.
+A compact dashboard for Vienna public transport departures.
 
 It renders HTML server-side, groups departure data by stop, highlights disruptions, accepts custom stop IDs through the query string, and shows whether metros are air-conditioned.
 
-<img width="500" alt="Screenshot of the Dashboard" src="https://github.com/user-attachments/assets/575e0637-e15e-4f19-8ba1-2e70b755d9af">
+<img height="400" alt="Screenshot of the Dashboard" src="https://github.com/user-attachments/assets/60952e12-05d9-41a4-b0dc-b4bd2096098c" />
 
 ## Stack
 
