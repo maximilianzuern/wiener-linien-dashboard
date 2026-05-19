@@ -1,0 +1,24 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans:
+    "Geist", system-ui, ui-sans-serif, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol", "Noto Color Emoji";
+
+  --color-metro-u1: #e20714;
+  --color-metro-u2: #a862a3;
+  --color-metro-u3: #ee7d00;
+  --color-metro-u4: #009540;
+  --color-metro-u5: #008e95;
+  --color-metro-u6: #9d6930;
+}
+
+html,
+body {
+  /* @apply bg-white dark:bg-gray-950; */
+  @apply bg-slate-100 antialiased;
+
+  /* @media (prefers-color-scheme: dark) {
+    color-scheme: dark;
+  } */
+}

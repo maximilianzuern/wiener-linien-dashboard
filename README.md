@@ -1,56 +1,39 @@
 # Wiener Linien Dashboard
 
-This is a [Next.js](https://nextjs.org/) project that provides real-time public transport information for Vienna using the Wiener Linien API.
+A compact React Router v7 dashboard for Vienna public transport departures.
 
-The Wiener Linien API was reverse engineered to provide details about the air conditioning in metro lines.
+It renders HTML server-side, groups departure data by stop, highlights disruptions, accepts custom stop IDs through the query string, and shows whether metros are air-conditioned.
 
-<img width="600" alt="Screenshot of the Dashboard" src="https://github.com/user-attachments/assets/575e0637-e15e-4f19-8ba1-2e70b755d9af">
+<img width="500" alt="Screenshot of the Dashboard" src="https://github.com/user-attachments/assets/575e0637-e15e-4f19-8ba1-2e70b755d9af">
 
-Built with:
-- Next.js 14
-- TailwindCSS
-- Hosted on Cloudflare Pages via [next-on-pages](https://github.com/cloudflare/next-on-pages)
+## Stack
 
-## Getting Started
+- TypeScript and React
+- React Router v7 in framework mode with Vite v7 and SSR to load the data from the Wiener Linien server before rendering HTML
+- Tailwind CSS v4 for styling
+- lucide-react icons
+- Oxlint and Oxfmt for fast linting and formatting
+- Cloudflare Workers for deploying the app on the edge close to the Wiener Linien API server to minimize latency
 
-### Prerequisites
-- npm
-- [wrangler](https://developers.cloudflare.com/workers/cli-wrangler/install-update)
-- [Cloudflare Workers/Pages](https://developers.cloudflare.com/workers/platform/pricing/) to deploy as Full Stack Application
+## Usage
 
-### Steps
+By default, the app shows demo stops. Pass Wiener Linien stop IDs with `stopID` or `id`:
 
-1. Clone the repo
-2. Install dependencies via `npm install` in the root directory
-3. Run the development server `npm run dev`:
+```txt
+http://<url>/?stopID=123&stopID=456&id=789
+```
 
+The dashboard accepts up to 10 custom stop IDs.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Metro A/C is not officially exposed as an air-conditioning field in the API. The app infers it from the `vehicle.foldingRamp` value in each departure.
 
-## Cloudflare Integration
+The requests to the Wiener Linien API are made on the server in [`app/services/wienerLinien.server.ts`](app/services/wienerLinien.server.ts).
 
-This project integrates with Cloudflare Pages. Besides the dev script mentioned above, there are a few extra scripts for Cloudflare integration:
-
-- pages:build: Build the application for Pages using the @cloudflare/next-on-pages CLI.
-- preview: Locally preview your Pages application using the Wrangler CLI.
-- deploy: Deploy your Pages application using the Wrangler CLI.
-
-Note: While the dev script is optimal for local development, you should periodically preview your Pages application to ensure it works properly in the Pages environment. 
-
-For more details, see the @cloudflare/next-on-pages [recommended workflow](https://github.com/cloudflare/next-on-pages/blob/main/internal-packages/next-dev/README.md).
-
-## API Routes
-
-`/api/monitor`
-
-Fetches real-time public transport information from the Wiener Linien API.
-
-#### Query Parameters
-
-- `stopID`: The ID of the stop to fetch information for.
-
-#### Example
+## Local Development
 
 ```bash
-"http://localhost:3000/?stopID=12345"
+npm i
+npm run dev
 ```
+
+Open the app at [http://localhost:5173](http://localhost:5173).
