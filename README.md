@@ -25,7 +25,7 @@ By default, the app shows demo stops. Pass Wiener Linien stop IDs with `stopID` 
 http://<url>/?stopID=123&stopID=456&id=789
 ```
 
-The dashboard accepts up to 10 custom stop IDs.
+The dashboard accepts up to 10 stop IDs.
 
 Metro A/C is not officially exposed as an air-conditioning field in the API. The app infers it from the `vehicle.foldingRamp` value for each metro departure.
 
