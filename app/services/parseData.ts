@@ -103,7 +103,7 @@ export function parseData(data: WienerLinienResponse, maxCountdown: number): Par
           countdown: departure.departureTime.countdown,
           timeReal: formatViennaTime(departure.departureTime.timeReal, true),
           timePlanned: formatViennaTime(departure.departureTime.timePlanned, true),
-          aircon: departure.vehicle.foldingRamp,
+          aircon: departure.vehicle?.foldingRamp,
         }));
 
       // Skip lines without any relevant departures

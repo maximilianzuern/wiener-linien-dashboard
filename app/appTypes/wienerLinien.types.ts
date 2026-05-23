@@ -43,7 +43,7 @@ interface Departures {
 
 interface Departure {
   departureTime: DepartureTime;
-  vehicle: Vehicle;
+  vehicle?: Vehicle;
 }
 
 interface DepartureTime {
@@ -60,6 +60,8 @@ interface Vehicle {
   richtungsId: string;
   barrierFree: boolean;
   foldingRamp?: boolean;
+  cooling?: boolean;
+  onStop?: boolean;
   realtimeSupported: boolean;
   trafficjam: boolean;
   type: string;
@@ -85,7 +87,7 @@ interface Properties {
   municipalityId: number;
   type: string;
   coordName: string;
-  gate: string;
+  gate?: string;
   attributes: PropertiesAttributes;
 }
 
