@@ -27,7 +27,7 @@ http://<url>/?stopID=123&stopID=456&id=789
 
 The dashboard accepts up to 10 custom stop IDs.
 
-Metro A/C is not officially exposed as an air-conditioning field in the API. The app infers it from the `vehicle.foldingRamp` value in each departure.
+Metro A/C is not officially exposed as an air-conditioning field in the API. The app infers it from the `vehicle.foldingRamp` value for each metro departure.
 
 The requests to the Wiener Linien API are made on the server in [`app/services/wienerLinien.server.ts`](app/services/wienerLinien.server.ts).
 
