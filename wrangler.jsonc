@@ -17,7 +17,12 @@
 			"enabled": true
 		}
 	},
-
+	"routes": [
+		{
+			"pattern": "wienerlinien.maximilianslab.com",
+			"custom_domain": true
+		}
+	],
 	"preview_urls": false,
 	/**
 	 * Placement
