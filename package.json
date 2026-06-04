@@ -17,24 +17,24 @@
   },
   "dependencies": {
     "isbot": "^5.1.40",
-    "lucide-react": "^1.16.0",
+    "lucide-react": "^1.17.0",
     "react": "^19.2.6",
     "react-dom": "^19.2.6",
-    "react-router": "^7.15.1"
+    "react-router": "^7.16.0"
   },
   "devDependencies": {
-    "@cloudflare/vite-plugin": "^1.37.1",
-    "@react-router/dev": "^7.15.1",
+    "@cloudflare/vite-plugin": "^1.39.1",
+    "@react-router/dev": "^7.16.0",
     "@tailwindcss/vite": "^4.3.0",
-    "@types/node": "^25.8.0",
-    "@types/react": "^19.2.14",
+    "@types/node": "^25.9.1",
+    "@types/react": "^19.2.15",
     "@types/react-dom": "^19.2.3",
-    "oxfmt": "^0.50.0",
-    "oxlint": "^1.65.0",
+    "oxfmt": "^0.52.0",
+    "oxlint": "^1.67.0",
     "tailwindcss": "^4.3.0",
     "typescript": "^5.9.3",
-    "vite": "^7.3.3",
+    "vite": "^7.3.5",
     "vite-tsconfig-paths": "^6.1.1",
-    "wrangler": "^4.92.0"
+    "wrangler": "^4.96.0"
   }
 }
