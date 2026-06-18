@@ -16,25 +16,25 @@
     "fmt:check": "oxfmt --check"
   },
   "dependencies": {
-    "isbot": "^5.1.40",
-    "lucide-react": "^1.17.0",
-    "react": "^19.2.6",
-    "react-dom": "^19.2.6",
-    "react-router": "^7.16.0"
+    "isbot": "^5.1.43",
+    "lucide-react": "^1.18.0",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7",
+    "react-router": "^7.17.0"
   },
   "devDependencies": {
-    "@cloudflare/vite-plugin": "^1.39.1",
-    "@react-router/dev": "^7.16.0",
-    "@tailwindcss/vite": "^4.3.0",
-    "@types/node": "^25.9.1",
-    "@types/react": "^19.2.15",
+    "@cloudflare/vite-plugin": "^1.40.2",
+    "@react-router/dev": "^7.17.0",
+    "@tailwindcss/vite": "^4.3.1",
+    "@types/node": "^25.9.3",
+    "@types/react": "^19.2.17",
     "@types/react-dom": "^19.2.3",
-    "oxfmt": "^0.52.0",
-    "oxlint": "^1.67.0",
-    "tailwindcss": "^4.3.0",
+    "oxfmt": "^0.55.0",
+    "oxlint": "^1.70.0",
+    "tailwindcss": "^4.3.1",
     "typescript": "^5.9.3",
     "vite": "^7.3.5",
     "vite-tsconfig-paths": "^6.1.1",
-    "wrangler": "^4.96.0"
+    "wrangler": "^4.100.0"
   }
 }
