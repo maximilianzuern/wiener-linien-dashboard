@@ -1,5 +1,5 @@
+import { Badge, Popover } from "@cloudflare/kumo";
 import { Snowflake, Flame } from "lucide-react";
-import { useEffect, useState } from "react";
 
 type CountdownBadgeProps = {
   countdown: number;
@@ -16,44 +16,44 @@ const CountdownBadge = ({
   type,
   hasAircon,
 }: CountdownBadgeProps) => {
-  const [showPopover, setShowPopover] = useState(false);
-
   const isUrgent = countdown < 2;
   const isImmediate = countdown < 1;
   const isMetro = type === "ptMetro";
 
   const hasTimingInfo = Boolean(timeReal || timePlanned);
-  const shouldShowPopover = showPopover && hasTimingInfo;
   const shouldShowAirconBadge = isMetro && hasAircon != null;
 
   const popoverText =
     timeReal && timeReal !== "Invalid Date" ? timeReal : `Planned: ${timePlanned ?? ""}`;
 
-  useEffect(() => {
-    if (showPopover) {
-      const handleClickOutside = () => setShowPopover(false);
-      document.addEventListener("click", handleClickOutside);
-      return () => document.removeEventListener("click", handleClickOutside);
-    }
-  }, [showPopover]);
+  const countdownBadge = (
+    <Badge
+      className={`px-2 py-1 font-bold ${isImmediate ? "animate-pulse" : ""} ${
+        hasAircon ? "border-2 border-blue-600" : ""
+      }`}
+      variant={isUrgent ? "red" : "green"}
+    >
+      {countdown}
+    </Badge>
+  );
 
   return (
     <span className="relative mr-2 inline-block">
-      <button
-        onClick={(event) => {
-          event.stopPropagation();
-          setShowPopover((prev) => !prev);
-        }}
-        className={`inline-block rounded-full px-2 py-1 text-xs font-bold text-white ${isUrgent ? "bg-orange-600" : "bg-green-600"} ${isImmediate ? "animate-pulse" : ""} ${hasAircon ? "border-2 border-blue-600" : ""}`}
-      >
-        {countdown}
-      </button>
-
-      {shouldShowPopover && (
-        <div className="absolute bottom-full left-1/2 z-10 -translate-x-1/2 -translate-y-2 transform rounded-lg bg-gray-900 px-3 py-2 text-sm font-medium text-white">
-          {popoverText}
-          <div className="absolute -bottom-1 left-1/2 h-2 w-2 -translate-x-1/2 rotate-45 transform bg-gray-900"></div>
-        </div>
+      {hasTimingInfo ? (
+        <Popover>
+          <Popover.Trigger
+            openOnHover
+            delay={150}
+            aria-label={`Show departure time for ${countdown} minute countdown`}
+          >
+            {countdownBadge}
+          </Popover.Trigger>
+          <Popover.Content side="top">
+            <Popover.Description>{popoverText}</Popover.Description>
+          </Popover.Content>
+        </Popover>
+      ) : (
+        countdownBadge
       )}
 
       {shouldShowAirconBadge && (
