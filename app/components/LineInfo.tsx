@@ -26,7 +26,6 @@ const LineInfo = ({ line }: { line: ParsedLine }) => (
           </span>
           {TRANSPORT_ICON_LOOKUP[line.type as keyof typeof TRANSPORT_ICON_LOOKUP] ?? ""}
         </div>
-        {/* TODO: maybe use "lg" instead of "base"? */}
         <Text size="lg" truncate>
           {formatTowards(line.towards)}
         </Text>

@@ -5,7 +5,7 @@ import type { ParsedStop } from "~/appTypes/output.types";
 import LineInfo from "./LineInfo";
 
 const StopCard = ({ stop }: { stop: ParsedStop }) => (
-  <LayerCard className="h-full">
+  <LayerCard>
     <LayerCard.Secondary>
       <Text variant="heading3" as="h3">
         {stop.title}
