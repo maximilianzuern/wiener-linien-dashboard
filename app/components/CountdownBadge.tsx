@@ -62,9 +62,9 @@ const CountdownBadge = ({
           title={hasAircon ? "❄️ A/C available" : "🥵 No A/C"}
         >
           {hasAircon ? (
-            <Snowflake className="h-4 w-4 text-blue-500" />
+            <Snowflake className="h-4 w-4 text-blue-500" stroke-width="2" />
           ) : (
-            <Flame className="h-4 w-4 text-orange-600" />
+            <Flame className="h-4 w-4 text-orange-600" stroke-width="3" />
           )}
         </span>
       )}
