@@ -32,7 +32,7 @@ const CountdownBadge = ({
   );
 
   return (
-    <span className="relative mr-2 inline-block">
+    <span className="relative inline-block">
       {hasTimingInfo ? (
         <Popover>
           <Popover.Trigger

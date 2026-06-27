@@ -30,7 +30,7 @@ const LineInfo = ({ line }: { line: ParsedLine }) => (
           {formatTowards(line.towards)}
         </Text>
       </div>
-      <div>
+      <div className="flex items-center gap-2">
         {line.departures.slice(0, MAX_DISPLAYED_COUNTDOWNS).map((departure, i) => (
           <CountdownBadge
             key={i}
