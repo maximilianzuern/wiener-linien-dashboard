@@ -1,3 +1,5 @@
+import { Text } from "@cloudflare/kumo";
+
 import type { ParsedLine } from "~/appTypes/output.types";
 
 import {
@@ -11,7 +13,7 @@ import CountdownBadge from "./CountdownBadge";
 import DisruptAlert from "./DisruptAlert";
 
 const LineInfo = ({ line }: { line: ParsedLine }) => (
-  <div className="mb-2">
+  <div>
     <div className="flex items-center">
       <div>
         <div className="flex items-center gap-2 text-lg font-bold">
@@ -24,9 +26,12 @@ const LineInfo = ({ line }: { line: ParsedLine }) => (
           </span>
           {TRANSPORT_ICON_LOOKUP[line.type as keyof typeof TRANSPORT_ICON_LOOKUP] ?? ""}
         </div>
-        <div className="text-gray-700">{formatTowards(line.towards)}</div>
+        {/* TODO: maybe use "lg" instead of "base"? */}
+        <Text size="base" truncate>
+          {formatTowards(line.towards)}
+        </Text>
       </div>
-      <div className="mt-6 ml-2">
+      <div className="mt-2 ml-2">
         {line.departures.slice(0, MAX_DISPLAYED_COUNTDOWNS).map((departure, i) => (
           <CountdownBadge
             key={i}
