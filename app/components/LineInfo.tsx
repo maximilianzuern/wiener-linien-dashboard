@@ -14,7 +14,7 @@ import DisruptAlert from "./DisruptAlert";
 
 const LineInfo = ({ line }: { line: ParsedLine }) => (
   <div>
-    <div className="flex items-center">
+    <div className="flex items-center gap-3">
       <div>
         <div className="flex items-center gap-2 text-lg font-bold">
           <span
@@ -30,7 +30,7 @@ const LineInfo = ({ line }: { line: ParsedLine }) => (
           {formatTowards(line.towards)}
         </Text>
       </div>
-      <div className="mt-2 ml-2">
+      <div>
         {line.departures.slice(0, MAX_DISPLAYED_COUNTDOWNS).map((departure, i) => (
           <CountdownBadge
             key={i}
