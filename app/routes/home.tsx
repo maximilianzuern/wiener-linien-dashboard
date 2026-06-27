@@ -1,3 +1,4 @@
+import { Grid, GridItem } from "@cloudflare/kumo";
 import { Suspense } from "react";
 import { Await } from "react-router";
 
@@ -89,11 +90,13 @@ export default function Home({ loaderData }: Route.ComponentProps) {
                   <NoMonitorDataMessage stopIds={unresolvedStopIds} />
                 )}
 
-                <div className="grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-3">
+                <Grid variant="3up" gap="sm">
                   {data.stops.map((stop) => (
-                    <StopCard key={stop.title} stop={stop} />
+                    <GridItem key={stop.title}>
+                      <StopCard stop={stop} />
+                    </GridItem>
                   ))}
-                </div>
+                </Grid>
               </>
             );
           }}
