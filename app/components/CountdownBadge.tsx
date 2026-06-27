@@ -16,8 +16,7 @@ const CountdownBadge = ({
   type,
   hasAircon,
 }: CountdownBadgeProps) => {
-  const isUrgent = countdown < 2;
-  const isImmediate = countdown < 1;
+  const isImmediate = countdown == 0;
   const isMetro = type === "ptMetro";
 
   const hasTimingInfo = Boolean(timeReal || timePlanned);
@@ -27,12 +26,7 @@ const CountdownBadge = ({
     timeReal && timeReal !== "Invalid Date" ? timeReal : `Planned: ${timePlanned ?? ""}`;
 
   const countdownBadge = (
-    <Badge
-      className={`px-2 py-1 font-bold ${isImmediate ? "animate-pulse" : ""} ${
-        hasAircon ? "border-2 border-blue-600" : ""
-      }`}
-      variant={isUrgent ? "red" : "green"}
-    >
+    <Badge className={`font-bold ${isImmediate ? "animate-pulse" : ""}`} variant="green">
       {countdown}
     </Badge>
   );
