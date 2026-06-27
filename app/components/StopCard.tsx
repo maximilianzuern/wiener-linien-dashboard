@@ -1,17 +1,23 @@
+import { LayerCard, Text } from "@cloudflare/kumo";
+
 import type { ParsedStop } from "~/appTypes/output.types";
 
 import LineInfo from "./LineInfo";
 
 const StopCard = ({ stop }: { stop: ParsedStop }) => (
-  <div className="rounded-lg bg-white p-3 shadow-lg">
-    <h3 className="border-b-1 border-gray-200 text-xl font-semibold">{stop.title}</h3>
+  <LayerCard className="h-full">
+    <LayerCard.Secondary>
+      <Text variant="heading3" as="h3">
+        {stop.title}
+      </Text>
+    </LayerCard.Secondary>
 
-    <div className="mt-2">
+    <LayerCard.Primary>
       {stop.lines.map((line, index) => (
         <LineInfo key={`${line.name}-${line.towards}-${index}`} line={line} />
       ))}
-    </div>
-  </div>
+    </LayerCard.Primary>
+  </LayerCard>
 );
 
 export default StopCard;
