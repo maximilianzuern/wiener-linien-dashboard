@@ -23,7 +23,7 @@
 			"custom_domain": true
 		}
 	],
-	"preview_urls": false,
+	"preview_urls": true,
 	/**
 	 * Placement
 	 * Docs: https://developers.cloudflare.com/workers/configuration/placement/#specify-a-host-endpoint
