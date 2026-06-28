@@ -7,7 +7,7 @@ import LineInfo from "./LineInfo";
 const StopCard = ({ stop }: { stop: ParsedStop }) => (
   <LayerCard>
     <LayerCard.Secondary>
-      <Text variant="heading3" as="h3">
+      <Text variant="heading3" as="label" truncate>
         {stop.title}
       </Text>
     </LayerCard.Secondary>
