@@ -5,7 +5,7 @@ A compact dashboard for Vienna public transport departures.
 It renders HTML server-side, groups departure data by stop, highlights disruptions, accepts custom stop IDs through the query string, and shows whether metros are air-conditioned.
 
 <p align="center">
-    <img height="400" alt="Screenshot of the Dashboard" src="https://github.com/user-attachments/assets/60952e12-05d9-41a4-b0dc-b4bd2096098c" />
+    <img height="400" alt="Screenshot of the Dashboard" src="https://github.com/user-attachments/assets/64984569-f2d3-4777-b67a-d6f8924ee89c" />
 </p>
 
 ## Stack
