@@ -16,6 +16,7 @@
     "fmt:check": "oxfmt --check"
   },
   "dependencies": {
+    "@cloudflare/kumo": "^2.6.0",
     "isbot": "^5.1.43",
     "lucide-react": "^1.18.0",
     "react": "^19.2.7",

@@ -1,3 +1,5 @@
+@source "../node_modules/@cloudflare/kumo/dist/**/*.{js,jsx,ts,tsx}";
+@import "@cloudflare/kumo/styles/tailwind";
 @import "tailwindcss";
 
 @theme {
@@ -16,7 +18,7 @@
 html,
 body {
   /* @apply bg-white dark:bg-gray-950; */
-  @apply bg-slate-100 antialiased;
+  @apply bg-zinc-50 antialiased;
 
   /* @media (prefers-color-scheme: dark) {
     color-scheme: dark;
