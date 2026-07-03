@@ -2,7 +2,7 @@ import { Grid, GridItem } from "@cloudflare/kumo";
 import { Suspense } from "react";
 import { Await } from "react-router";
 
-import { LoadingSpinner } from "~/components/LoadingSpinner";
+import { LoadingSkeleton } from "~/components/LoadingSkeleton";
 import { NoMonitorDataMessage } from "~/components/NoMonitorDataMessage";
 
 import type { ParsedMonitorData } from "../appTypes/output.types";
@@ -81,7 +81,7 @@ export default function Home({ loaderData }: Route.ComponentProps) {
       <h1 className="mb-1 text-center text-xl font-bold">Vienna Public Transport</h1>
       {!hasCustomStops && <DefaultStopsMessage />}
 
-      <Suspense fallback={<LoadingSpinner />}>
+      <Suspense fallback={<LoadingSkeleton />}>
         <Await resolve={monitorData}>
           {({ data, unresolvedStopIds }: MonitorData) => {
             return (
