@@ -50,9 +50,7 @@
                     "realtimeSupported": true,
                     "trafficjam": false,
                     "type": "ptMetro",
-                    "attributes": {
-
-                    },
+                    "attributes": {},
                     "linienId": 301
                   }
                 },
@@ -73,9 +71,7 @@
                     "realtimeSupported": true,
                     "trafficjam": false,
                     "type": "ptMetro",
-                    "attributes": {
-
-                    },
+                    "attributes": {},
                     "linienId": 301
                   }
                 },
@@ -96,9 +92,7 @@
                     "realtimeSupported": true,
                     "trafficjam": false,
                     "type": "ptMetro",
-                    "attributes": {
-
-                    },
+                    "attributes": {},
                     "linienId": 301
                   }
                 },
@@ -119,9 +113,7 @@
                     "realtimeSupported": true,
                     "trafficjam": false,
                     "type": "ptMetro",
-                    "attributes": {
-
-                    },
+                    "attributes": {},
                     "linienId": 301
                   }
                 },
@@ -142,9 +134,7 @@
                     "realtimeSupported": true,
                     "trafficjam": false,
                     "type": "ptMetro",
-                    "attributes": {
-
-                    },
+                    "attributes": {},
                     "linienId": 301
                   }
                 },
@@ -165,9 +155,7 @@
                     "realtimeSupported": true,
                     "trafficjam": false,
                     "type": "ptMetro",
-                    "attributes": {
-
-                    },
+                    "attributes": {},
                     "linienId": 301
                   }
                 },
@@ -188,9 +176,7 @@
                     "realtimeSupported": true,
                     "trafficjam": false,
                     "type": "ptMetro",
-                    "attributes": {
-
-                    },
+                    "attributes": {},
                     "linienId": 301
                   }
                 },
@@ -211,9 +197,7 @@
                     "realtimeSupported": true,
                     "trafficjam": false,
                     "type": "ptMetro",
-                    "attributes": {
-
-                    },
+                    "attributes": {},
                     "linienId": 301
                   }
                 },
@@ -234,9 +218,7 @@
                     "realtimeSupported": true,
                     "trafficjam": false,
                     "type": "ptMetro",
-                    "attributes": {
-
-                    },
+                    "attributes": {},
                     "linienId": 301
                   }
                 },
@@ -257,9 +239,7 @@
                     "realtimeSupported": true,
                     "trafficjam": false,
                     "type": "ptMetro",
-                    "attributes": {
-
-                    },
+                    "attributes": {},
                     "linienId": 301
                   }
                 },
@@ -280,9 +260,7 @@
                     "realtimeSupported": true,
                     "trafficjam": false,
                     "type": "ptMetro",
-                    "attributes": {
-
-                    },
+                    "attributes": {},
                     "linienId": 301
                   }
                 },
@@ -303,9 +281,7 @@
                     "realtimeSupported": true,
                     "trafficjam": false,
                     "type": "ptMetro",
-                    "attributes": {
-
-                    },
+                    "attributes": {},
                     "linienId": 301
                   }
                 },
@@ -326,9 +302,7 @@
                     "realtimeSupported": true,
                     "trafficjam": false,
                     "type": "ptMetro",
-                    "attributes": {
-
-                    },
+                    "attributes": {},
                     "linienId": 301
                   }
                 },
@@ -349,9 +323,7 @@
                     "realtimeSupported": true,
                     "trafficjam": false,
                     "type": "ptMetro",
-                    "attributes": {
-
-                    },
+                    "attributes": {},
                     "linienId": 301
                   }
                 }
@@ -361,9 +333,7 @@
             "lineId": 301
           }
         ],
-        "attributes": {
-
-        }
+        "attributes": {}
       },
       {
         "locationStop": {
@@ -414,9 +384,7 @@
                     "realtimeSupported": true,
                     "trafficjam": false,
                     "type": "ptMetro",
-                    "attributes": {
-
-                    },
+                    "attributes": {},
                     "linienId": 301
                   }
                 },
@@ -437,9 +405,7 @@
                     "realtimeSupported": true,
                     "trafficjam": false,
                     "type": "ptMetro",
-                    "attributes": {
-
-                    },
+                    "attributes": {},
                     "linienId": 301
                   }
                 },
@@ -460,9 +426,7 @@
                     "realtimeSupported": true,
                     "trafficjam": false,
                     "type": "ptMetro",
-                    "attributes": {
-
-                    },
+                    "attributes": {},
                     "linienId": 301
                   }
                 },
@@ -483,9 +447,7 @@
                     "realtimeSupported": true,
                     "trafficjam": false,
                     "type": "ptMetro",
-                    "attributes": {
-
-                    },
+                    "attributes": {},
                     "linienId": 301
                   }
                 },
@@ -506,9 +468,7 @@
                     "realtimeSupported": true,
                     "trafficjam": false,
                     "type": "ptMetro",
-                    "attributes": {
-
-                    },
+                    "attributes": {},
                     "linienId": 301
                   }
                 },
@@ -529,9 +489,7 @@
                     "realtimeSupported": true,
                     "trafficjam": false,
                     "type": "ptMetro",
-                    "attributes": {
-
-                    },
+                    "attributes": {},
                     "linienId": 301
                   }
                 },
@@ -552,9 +510,7 @@
                     "realtimeSupported": true,
                     "trafficjam": false,
                     "type": "ptMetro",
-                    "attributes": {
-
-                    },
+                    "attributes": {},
                     "linienId": 301
                   }
                 },
@@ -575,9 +531,7 @@
                     "realtimeSupported": true,
                     "trafficjam": false,
                     "type": "ptMetro",
-                    "attributes": {
-
-                    },
+                    "attributes": {},
                     "linienId": 301
                   }
                 },
@@ -598,9 +552,7 @@
                     "realtimeSupported": true,
                     "trafficjam": false,
                     "type": "ptMetro",
-                    "attributes": {
-
-                    },
+                    "attributes": {},
                     "linienId": 301
                   }
                 },
@@ -621,9 +573,7 @@
                     "realtimeSupported": true,
                     "trafficjam": false,
                     "type": "ptMetro",
-                    "attributes": {
-
-                    },
+                    "attributes": {},
                     "linienId": 301
                   }
                 },
@@ -644,9 +594,7 @@
                     "realtimeSupported": true,
                     "trafficjam": false,
                     "type": "ptMetro",
-                    "attributes": {
-
-                    },
+                    "attributes": {},
                     "linienId": 301
                   }
                 },
@@ -667,9 +615,7 @@
                     "realtimeSupported": true,
                     "trafficjam": false,
                     "type": "ptMetro",
-                    "attributes": {
-
-                    },
+                    "attributes": {},
                     "linienId": 301
                   }
                 },
@@ -690,9 +636,7 @@
                     "realtimeSupported": true,
                     "trafficjam": false,
                     "type": "ptMetro",
-                    "attributes": {
-
-                    },
+                    "attributes": {},
                     "linienId": 301
                   }
                 },
@@ -713,9 +657,7 @@
                     "realtimeSupported": true,
                     "trafficjam": false,
                     "type": "ptMetro",
-                    "attributes": {
-
-                    },
+                    "attributes": {},
                     "linienId": 301
                   }
                 }
@@ -725,9 +667,7 @@
             "lineId": 301
           }
         ],
-        "attributes": {
-
-        }
+        "attributes": {}
       },
       {
         "locationStop": {
@@ -778,9 +718,7 @@
                     "realtimeSupported": true,
                     "trafficjam": false,
                     "type": "ptMetro",
-                    "attributes": {
-
-                    },
+                    "attributes": {},
                     "linienId": 304
                   }
                 },
@@ -801,9 +739,7 @@
                     "realtimeSupported": true,
                     "trafficjam": false,
                     "type": "ptMetro",
-                    "attributes": {
-
-                    },
+                    "attributes": {},
                     "linienId": 304
                   }
                 },
@@ -824,9 +760,7 @@
                     "realtimeSupported": true,
                     "trafficjam": false,
                     "type": "ptMetro",
-                    "attributes": {
-
-                    },
+                    "attributes": {},
                     "linienId": 304
                   }
                 },
@@ -847,9 +781,7 @@
                     "realtimeSupported": true,
                     "trafficjam": false,
                     "type": "ptMetro",
-                    "attributes": {
-
-                    },
+                    "attributes": {},
                     "linienId": 304
                   }
                 },
@@ -870,9 +802,7 @@
                     "realtimeSupported": true,
                     "trafficjam": false,
                     "type": "ptMetro",
-                    "attributes": {
-
-                    },
+                    "attributes": {},
                     "linienId": 304
                   }
                 },
@@ -893,9 +823,7 @@
                     "realtimeSupported": true,
                     "trafficjam": false,
                     "type": "ptMetro",
-                    "attributes": {
-
-                    },
+                    "attributes": {},
                     "linienId": 304
                   }
                 },
@@ -916,9 +844,7 @@
                     "realtimeSupported": true,
                     "trafficjam": false,
                     "type": "ptMetro",
-                    "attributes": {
-
-                    },
+                    "attributes": {},
                     "linienId": 304
                   }
                 },
@@ -939,9 +865,7 @@
                     "realtimeSupported": true,
                     "trafficjam": false,
                     "type": "ptMetro",
-                    "attributes": {
-
-                    },
+                    "attributes": {},
                     "linienId": 304
                   }
                 },
@@ -962,9 +886,7 @@
                     "realtimeSupported": true,
                     "trafficjam": false,
                     "type": "ptMetro",
-                    "attributes": {
-
-                    },
+                    "attributes": {},
                     "linienId": 304
                   }
                 },
@@ -985,9 +907,7 @@
                     "realtimeSupported": true,
                     "trafficjam": false,
                     "type": "ptMetro",
-                    "attributes": {
-
-                    },
+                    "attributes": {},
                     "linienId": 304
                   }
                 },
@@ -1008,9 +928,7 @@
                     "realtimeSupported": true,
                     "trafficjam": false,
                     "type": "ptMetro",
-                    "attributes": {
-
-                    },
+                    "attributes": {},
                     "linienId": 304
                   }
                 },
@@ -1031,9 +949,7 @@
                     "realtimeSupported": true,
                     "trafficjam": false,
                     "type": "ptMetro",
-                    "attributes": {
-
-                    },
+                    "attributes": {},
                     "linienId": 304
                   }
                 },
@@ -1054,9 +970,7 @@
                     "realtimeSupported": true,
                     "trafficjam": false,
                     "type": "ptMetro",
-                    "attributes": {
-
-                    },
+                    "attributes": {},
                     "linienId": 304
                   }
                 },
@@ -1077,9 +991,7 @@
                     "realtimeSupported": true,
                     "trafficjam": false,
                     "type": "ptMetro",
-                    "attributes": {
-
-                    },
+                    "attributes": {},
                     "linienId": 304
                   }
                 }
@@ -1089,9 +1001,7 @@
             "lineId": 304
           }
         ],
-        "attributes": {
-
-        }
+        "attributes": {}
       },
       {
         "locationStop": {
@@ -1142,9 +1052,7 @@
                     "realtimeSupported": true,
                     "trafficjam": false,
                     "type": "ptMetro",
-                    "attributes": {
-
-                    },
+                    "attributes": {},
                     "linienId": 304
                   }
                 },
@@ -1165,9 +1073,7 @@
                     "realtimeSupported": true,
                     "trafficjam": false,
                     "type": "ptMetro",
-                    "attributes": {
-
-                    },
+                    "attributes": {},
                     "linienId": 304
                   }
                 },
@@ -1188,9 +1094,7 @@
                     "realtimeSupported": true,
                     "trafficjam": false,
                     "type": "ptMetro",
-                    "attributes": {
-
-                    },
+                    "attributes": {},
                     "linienId": 304
                   }
                 },
@@ -1211,9 +1115,7 @@
                     "realtimeSupported": true,
                     "trafficjam": false,
                     "type": "ptMetro",
-                    "attributes": {
-
-                    },
+                    "attributes": {},
                     "linienId": 304
                   }
                 },
@@ -1234,9 +1136,7 @@
                     "realtimeSupported": true,
                     "trafficjam": false,
                     "type": "ptMetro",
-                    "attributes": {
-
-                    },
+                    "attributes": {},
                     "linienId": 304
                   }
                 },
@@ -1257,9 +1157,7 @@
                     "realtimeSupported": true,
                     "trafficjam": false,
                     "type": "ptMetro",
-                    "attributes": {
-
-                    },
+                    "attributes": {},
                     "linienId": 304
                   }
                 },
@@ -1280,9 +1178,7 @@
                     "realtimeSupported": true,
                     "trafficjam": false,
                     "type": "ptMetro",
-                    "attributes": {
-
-                    },
+                    "attributes": {},
                     "linienId": 304
                   }
                 },
@@ -1303,9 +1199,7 @@
                     "realtimeSupported": true,
                     "trafficjam": false,
                     "type": "ptMetro",
-                    "attributes": {
-
-                    },
+                    "attributes": {},
                     "linienId": 304
                   }
                 },
@@ -1326,9 +1220,7 @@
                     "realtimeSupported": true,
                     "trafficjam": false,
                     "type": "ptMetro",
-                    "attributes": {
-
-                    },
+                    "attributes": {},
                     "linienId": 304
                   }
                 },
@@ -1349,9 +1241,7 @@
                     "realtimeSupported": true,
                     "trafficjam": false,
                     "type": "ptMetro",
-                    "attributes": {
-
-                    },
+                    "attributes": {},
                     "linienId": 304
                   }
                 },
@@ -1372,9 +1262,7 @@
                     "realtimeSupported": true,
                     "trafficjam": false,
                     "type": "ptMetro",
-                    "attributes": {
-
-                    },
+                    "attributes": {},
                     "linienId": 304
                   }
                 },
@@ -1395,9 +1283,7 @@
                     "realtimeSupported": true,
                     "trafficjam": false,
                     "type": "ptMetro",
-                    "attributes": {
-
-                    },
+                    "attributes": {},
                     "linienId": 304
                   }
                 },
@@ -1418,9 +1304,7 @@
                     "realtimeSupported": true,
                     "trafficjam": false,
                     "type": "ptMetro",
-                    "attributes": {
-
-                    },
+                    "attributes": {},
                     "linienId": 304
                   }
                 },
@@ -1441,9 +1325,7 @@
                     "realtimeSupported": true,
                     "trafficjam": false,
                     "type": "ptMetro",
-                    "attributes": {
-
-                    },
+                    "attributes": {},
                     "linienId": 304
                   }
                 }
@@ -1453,9 +1335,7 @@
             "lineId": 304
           }
         ],
-        "attributes": {
-
-        }
+        "attributes": {}
       }
     ]
   },
