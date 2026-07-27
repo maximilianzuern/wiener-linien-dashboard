@@ -13,4 +13,5 @@
 .dev.vars*
 
 
-data/
+data/*
+!data/defaultData.json
