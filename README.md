@@ -11,7 +11,7 @@ It renders HTML server-side, groups departure data by stop, highlights disruptio
 ## Stack
 
 - TypeScript and React
-- React Router v7 in framework mode with Vite v7 and SSR to load the data from the Wiener Linien server before rendering HTML
+- React Router v8 in Framework Mode with Vite v8 and SSR to load data from the Wiener Linien server before rendering HTML
 - Tailwind CSS v4 for styling
 - lucide-react icons
 - Oxlint and Oxfmt for fast linting and formatting
