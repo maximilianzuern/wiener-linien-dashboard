@@ -13,6 +13,4 @@
 .dev.vars*
 
 
-.agents/
 data/
-skills-lock.json
