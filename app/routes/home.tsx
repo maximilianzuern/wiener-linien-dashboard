@@ -37,8 +37,8 @@ export function headers() {
   };
 }
 
-export async function loader({ request }: Route.LoaderArgs) {
-  const searchParams = new URL(request.url).searchParams;
+export async function loader({ request, url }: Route.LoaderArgs) {
+  const searchParams = url.searchParams;
   const requestedStopIds = [...searchParams.getAll("stopID"), ...searchParams.getAll("id")];
   const hasCustomStops = requestedStopIds.length > 0;
 

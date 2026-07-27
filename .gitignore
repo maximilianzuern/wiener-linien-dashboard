@@ -13,6 +13,5 @@
 .dev.vars*
 
 
-.agents/
-data/
-skills-lock.json
+data/*
+!data/defaultData.json
