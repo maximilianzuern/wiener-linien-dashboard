@@ -22,7 +22,7 @@ const DefaultStopsMessage = () => (
           </a>
           .
         </p>
-        <p>Flame and snowflake icons show whether a metro is air-conditioned.</p>
+        <p>Flame and snowflake icons show whether a bus, tram, or metro is air-conditioned.</p>
         <p>Want to choose your own stops?</p>
         <ol className="list-inside list-decimal">
           <li>
