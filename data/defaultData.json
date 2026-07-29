@@ -35,9 +35,9 @@
               "departure": [
                 {
                   "departureTime": {
-                    "timePlanned": "2026-03-29T17:09:00+0200",
-                    "timeReal": "2026-03-29T17:07:43+0200",
-                    "countdown": 1
+                    "timePlanned": "2026-07-29T22:43:00.000+0200",
+                    "timeReal": "2026-07-29T22:41:21.000+0200",
+                    "countdown": 2
                   },
                   "vehicle": {
                     "name": "U1",
@@ -47,6 +47,7 @@
                     "richtungsId": "1",
                     "barrierFree": true,
                     "foldingRamp": false,
+                    "cooling": false,
                     "realtimeSupported": true,
                     "trafficjam": false,
                     "type": "ptMetro",
@@ -56,9 +57,9 @@
                 },
                 {
                   "departureTime": {
-                    "timePlanned": "2026-03-29T17:14:00+0200",
-                    "timeReal": "2026-03-29T17:11:51+0200",
-                    "countdown": 5
+                    "timePlanned": "2026-07-29T22:50:30.000+0200",
+                    "timeReal": "2026-07-29T22:49:23.000+0200",
+                    "countdown": 10
                   },
                   "vehicle": {
                     "name": "U1",
@@ -68,6 +69,7 @@
                     "richtungsId": "1",
                     "barrierFree": true,
                     "foldingRamp": true,
+                    "cooling": true,
                     "realtimeSupported": true,
                     "trafficjam": false,
                     "type": "ptMetro",
@@ -77,9 +79,9 @@
                 },
                 {
                   "departureTime": {
-                    "timePlanned": "2026-03-29T17:19:00+0200",
-                    "timeReal": "2026-03-29T17:19:00+0200",
-                    "countdown": 12
+                    "timePlanned": "2026-07-29T22:58:00.000+0200",
+                    "timeReal": "2026-07-29T22:58:00.000+0200",
+                    "countdown": 19
                   },
                   "vehicle": {
                     "name": "U1",
@@ -88,7 +90,8 @@
                     "platform": "1",
                     "richtungsId": "1",
                     "barrierFree": true,
-                    "foldingRamp": true,
+                    "foldingRamp": false,
+                    "cooling": false,
                     "realtimeSupported": true,
                     "trafficjam": false,
                     "type": "ptMetro",
@@ -98,9 +101,9 @@
                 },
                 {
                   "departureTime": {
-                    "timePlanned": "2026-03-29T17:24:00+0200",
-                    "timeReal": "2026-03-29T17:24:00+0200",
-                    "countdown": 17
+                    "timePlanned": "2026-07-29T23:05:30.000+0200",
+                    "timeReal": "2026-07-29T23:05:30.000+0200",
+                    "countdown": 26
                   },
                   "vehicle": {
                     "name": "U1",
@@ -110,6 +113,7 @@
                     "richtungsId": "1",
                     "barrierFree": true,
                     "foldingRamp": true,
+                    "cooling": true,
                     "realtimeSupported": true,
                     "trafficjam": false,
                     "type": "ptMetro",
@@ -119,9 +123,9 @@
                 },
                 {
                   "departureTime": {
-                    "timePlanned": "2026-03-29T17:29:00+0200",
-                    "timeReal": "2026-03-29T17:29:00+0200",
-                    "countdown": 22
+                    "timePlanned": "2026-07-29T23:13:00.000+0200",
+                    "timeReal": "2026-07-29T23:13:00.000+0200",
+                    "countdown": 34
                   },
                   "vehicle": {
                     "name": "U1",
@@ -131,6 +135,7 @@
                     "richtungsId": "1",
                     "barrierFree": true,
                     "foldingRamp": true,
+                    "cooling": true,
                     "realtimeSupported": true,
                     "trafficjam": false,
                     "type": "ptMetro",
@@ -140,9 +145,9 @@
                 },
                 {
                   "departureTime": {
-                    "timePlanned": "2026-03-29T17:34:00+0200",
-                    "timeReal": "2026-03-29T17:34:00+0200",
-                    "countdown": 27
+                    "timePlanned": "2026-07-29T23:20:30.000+0200",
+                    "timeReal": "2026-07-29T23:20:30.000+0200",
+                    "countdown": 41
                   },
                   "vehicle": {
                     "name": "U1",
@@ -152,6 +157,7 @@
                     "richtungsId": "1",
                     "barrierFree": true,
                     "foldingRamp": true,
+                    "cooling": true,
                     "realtimeSupported": true,
                     "trafficjam": false,
                     "type": "ptMetro",
@@ -161,9 +167,9 @@
                 },
                 {
                   "departureTime": {
-                    "timePlanned": "2026-03-29T17:39:00+0200",
-                    "timeReal": "2026-03-29T17:39:00+0200",
-                    "countdown": 32
+                    "timePlanned": "2026-07-29T23:28:00.000+0200",
+                    "timeReal": "2026-07-29T23:28:00.000+0200",
+                    "countdown": 49
                   },
                   "vehicle": {
                     "name": "U1",
@@ -172,7 +178,8 @@
                     "platform": "1",
                     "richtungsId": "1",
                     "barrierFree": true,
-                    "foldingRamp": true,
+                    "foldingRamp": false,
+                    "cooling": false,
                     "realtimeSupported": true,
                     "trafficjam": false,
                     "type": "ptMetro",
@@ -182,9 +189,9 @@
                 },
                 {
                   "departureTime": {
-                    "timePlanned": "2026-03-29T17:44:00+0200",
-                    "timeReal": "2026-03-29T17:44:00+0200",
-                    "countdown": 37
+                    "timePlanned": "2026-07-29T23:35:30.000+0200",
+                    "timeReal": "2026-07-29T23:35:30.000+0200",
+                    "countdown": 56
                   },
                   "vehicle": {
                     "name": "U1",
@@ -194,6 +201,7 @@
                     "richtungsId": "1",
                     "barrierFree": true,
                     "foldingRamp": true,
+                    "cooling": true,
                     "realtimeSupported": true,
                     "trafficjam": false,
                     "type": "ptMetro",
@@ -203,9 +211,9 @@
                 },
                 {
                   "departureTime": {
-                    "timePlanned": "2026-03-29T17:49:00+0200",
-                    "timeReal": "2026-03-29T17:49:00+0200",
-                    "countdown": 42
+                    "timePlanned": "2026-07-29T23:43:00.000+0200",
+                    "timeReal": "2026-07-29T23:43:00.000+0200",
+                    "countdown": 64
                   },
                   "vehicle": {
                     "name": "U1",
@@ -215,111 +223,7 @@
                     "richtungsId": "1",
                     "barrierFree": true,
                     "foldingRamp": true,
-                    "realtimeSupported": true,
-                    "trafficjam": false,
-                    "type": "ptMetro",
-                    "attributes": {},
-                    "linienId": 301
-                  }
-                },
-                {
-                  "departureTime": {
-                    "timePlanned": "2026-03-29T17:54:00+0200",
-                    "timeReal": "2026-03-29T17:54:00+0200",
-                    "countdown": 47
-                  },
-                  "vehicle": {
-                    "name": "U1",
-                    "towards": "Leopoldau",
-                    "direction": "H",
-                    "platform": "1",
-                    "richtungsId": "1",
-                    "barrierFree": true,
-                    "foldingRamp": true,
-                    "realtimeSupported": true,
-                    "trafficjam": false,
-                    "type": "ptMetro",
-                    "attributes": {},
-                    "linienId": 301
-                  }
-                },
-                {
-                  "departureTime": {
-                    "timePlanned": "2026-03-29T17:59:00+0200",
-                    "timeReal": "2026-03-29T17:59:00+0200",
-                    "countdown": 52
-                  },
-                  "vehicle": {
-                    "name": "U1",
-                    "towards": "Leopoldau",
-                    "direction": "H",
-                    "platform": "1",
-                    "richtungsId": "1",
-                    "barrierFree": true,
-                    "foldingRamp": true,
-                    "realtimeSupported": true,
-                    "trafficjam": false,
-                    "type": "ptMetro",
-                    "attributes": {},
-                    "linienId": 301
-                  }
-                },
-                {
-                  "departureTime": {
-                    "timePlanned": "2026-03-29T18:04:00+0200",
-                    "timeReal": "2026-03-29T18:04:00+0200",
-                    "countdown": 57
-                  },
-                  "vehicle": {
-                    "name": "U1",
-                    "towards": "Leopoldau",
-                    "direction": "H",
-                    "platform": "1",
-                    "richtungsId": "1",
-                    "barrierFree": true,
-                    "foldingRamp": true,
-                    "realtimeSupported": true,
-                    "trafficjam": false,
-                    "type": "ptMetro",
-                    "attributes": {},
-                    "linienId": 301
-                  }
-                },
-                {
-                  "departureTime": {
-                    "timePlanned": "2026-03-29T18:09:00+0200",
-                    "timeReal": "2026-03-29T18:09:00+0200",
-                    "countdown": 62
-                  },
-                  "vehicle": {
-                    "name": "U1",
-                    "towards": "Leopoldau",
-                    "direction": "H",
-                    "platform": "1",
-                    "richtungsId": "1",
-                    "barrierFree": true,
-                    "foldingRamp": true,
-                    "realtimeSupported": true,
-                    "trafficjam": false,
-                    "type": "ptMetro",
-                    "attributes": {},
-                    "linienId": 301
-                  }
-                },
-                {
-                  "departureTime": {
-                    "timePlanned": "2026-03-29T18:14:00+0200",
-                    "timeReal": "2026-03-29T18:14:00+0200",
-                    "countdown": 67
-                  },
-                  "vehicle": {
-                    "name": "U1",
-                    "towards": "Leopoldau",
-                    "direction": "H",
-                    "platform": "1",
-                    "richtungsId": "1",
-                    "barrierFree": true,
-                    "foldingRamp": true,
+                    "cooling": true,
                     "realtimeSupported": true,
                     "trafficjam": false,
                     "type": "ptMetro",
@@ -340,18 +244,18 @@
           "type": "Feature",
           "geometry": {
             "type": "Point",
-            "coordinates": [16.3715535, 48.2081099]
+            "coordinates": [16.3689933, 48.2012308]
           },
           "properties": {
-            "name": "60201320",
-            "title": "Stephansplatz",
+            "name": "60200657",
+            "title": "Karlsplatz",
             "municipality": "Wien",
             "municipalityId": 49000001,
             "type": "stop",
             "coordName": "WGS84",
             "gate": "2",
             "attributes": {
-              "rbl": 4118
+              "rbl": 4120
             }
           }
         },
@@ -369,8 +273,8 @@
               "departure": [
                 {
                   "departureTime": {
-                    "timePlanned": "2026-03-29T17:07:00+0200",
-                    "timeReal": "2026-03-29T17:07:34+0200",
+                    "timePlanned": "2026-07-29T22:40:00.000+0200",
+                    "timeReal": "2026-07-29T22:40:36.000+0200",
                     "countdown": 1
                   },
                   "vehicle": {
@@ -381,6 +285,7 @@
                     "richtungsId": "2",
                     "barrierFree": true,
                     "foldingRamp": true,
+                    "cooling": true,
                     "realtimeSupported": true,
                     "trafficjam": false,
                     "type": "ptMetro",
@@ -390,9 +295,9 @@
                 },
                 {
                   "departureTime": {
-                    "timePlanned": "2026-03-29T17:12:00+0200",
-                    "timeReal": "2026-03-29T17:12:28+0200",
-                    "countdown": 6
+                    "timePlanned": "2026-07-29T22:47:30.000+0200",
+                    "timeReal": "2026-07-29T22:47:44.000+0200",
+                    "countdown": 8
                   },
                   "vehicle": {
                     "name": "U1",
@@ -402,6 +307,7 @@
                     "richtungsId": "2",
                     "barrierFree": true,
                     "foldingRamp": true,
+                    "cooling": true,
                     "realtimeSupported": true,
                     "trafficjam": false,
                     "type": "ptMetro",
@@ -411,165 +317,19 @@
                 },
                 {
                   "departureTime": {
-                    "timePlanned": "2026-03-29T17:17:00+0200",
-                    "timeReal": "2026-03-29T17:18:54+0200",
-                    "countdown": 12
-                  },
-                  "vehicle": {
-                    "name": "U1",
-                    "towards": "Oberlaa",
-                    "direction": "R",
-                    "platform": "2",
-                    "richtungsId": "2",
-                    "barrierFree": true,
-                    "foldingRamp": true,
-                    "realtimeSupported": true,
-                    "trafficjam": false,
-                    "type": "ptMetro",
-                    "attributes": {},
-                    "linienId": 301
-                  }
-                },
-                {
-                  "departureTime": {
-                    "timePlanned": "2026-03-29T17:22:00+0200",
-                    "timeReal": "2026-03-29T17:23:34+0200",
+                    "timePlanned": "2026-07-29T22:55:00.000+0200",
+                    "timeReal": "2026-07-29T22:56:34.000+0200",
                     "countdown": 17
                   },
                   "vehicle": {
                     "name": "U1",
-                    "towards": "Alaudagasse",
-                    "direction": "R",
-                    "platform": "2",
-                    "richtungsId": "2",
-                    "barrierFree": true,
-                    "foldingRamp": true,
-                    "realtimeSupported": true,
-                    "trafficjam": false,
-                    "type": "ptMetro",
-                    "attributes": {},
-                    "linienId": 301
-                  }
-                },
-                {
-                  "departureTime": {
-                    "timePlanned": "2026-03-29T17:27:00+0200",
-                    "timeReal": "2026-03-29T17:27:00+0200",
-                    "countdown": 20
-                  },
-                  "vehicle": {
-                    "name": "U1",
                     "towards": "Oberlaa",
-                    "direction": "R",
-                    "platform": "2",
-                    "richtungsId": "2",
-                    "barrierFree": true,
-                    "foldingRamp": true,
-                    "realtimeSupported": true,
-                    "trafficjam": false,
-                    "type": "ptMetro",
-                    "attributes": {},
-                    "linienId": 301
-                  }
-                },
-                {
-                  "departureTime": {
-                    "timePlanned": "2026-03-29T17:32:00+0200",
-                    "timeReal": "2026-03-29T17:32:00+0200",
-                    "countdown": 25
-                  },
-                  "vehicle": {
-                    "name": "U1",
-                    "towards": "Alaudagasse",
-                    "direction": "R",
-                    "platform": "2",
-                    "richtungsId": "2",
-                    "barrierFree": true,
-                    "foldingRamp": true,
-                    "realtimeSupported": true,
-                    "trafficjam": false,
-                    "type": "ptMetro",
-                    "attributes": {},
-                    "linienId": 301
-                  }
-                },
-                {
-                  "departureTime": {
-                    "timePlanned": "2026-03-29T17:37:00+0200",
-                    "timeReal": "2026-03-29T17:37:00+0200",
-                    "countdown": 30
-                  },
-                  "vehicle": {
-                    "name": "U1",
-                    "towards": "Oberlaa",
-                    "direction": "R",
-                    "platform": "2",
-                    "richtungsId": "2",
-                    "barrierFree": true,
-                    "foldingRamp": true,
-                    "realtimeSupported": true,
-                    "trafficjam": false,
-                    "type": "ptMetro",
-                    "attributes": {},
-                    "linienId": 301
-                  }
-                },
-                {
-                  "departureTime": {
-                    "timePlanned": "2026-03-29T17:42:00+0200",
-                    "timeReal": "2026-03-29T17:42:00+0200",
-                    "countdown": 35
-                  },
-                  "vehicle": {
-                    "name": "U1",
-                    "towards": "Alaudagasse",
-                    "direction": "R",
-                    "platform": "2",
-                    "richtungsId": "2",
-                    "barrierFree": true,
-                    "foldingRamp": true,
-                    "realtimeSupported": true,
-                    "trafficjam": false,
-                    "type": "ptMetro",
-                    "attributes": {},
-                    "linienId": 301
-                  }
-                },
-                {
-                  "departureTime": {
-                    "timePlanned": "2026-03-29T17:47:00+0200",
-                    "timeReal": "2026-03-29T17:47:00+0200",
-                    "countdown": 40
-                  },
-                  "vehicle": {
-                    "name": "U1",
-                    "towards": "Oberlaa",
-                    "direction": "R",
-                    "platform": "2",
-                    "richtungsId": "2",
-                    "barrierFree": true,
-                    "foldingRamp": true,
-                    "realtimeSupported": true,
-                    "trafficjam": false,
-                    "type": "ptMetro",
-                    "attributes": {},
-                    "linienId": 301
-                  }
-                },
-                {
-                  "departureTime": {
-                    "timePlanned": "2026-03-29T17:52:00+0200",
-                    "timeReal": "2026-03-29T17:52:00+0200",
-                    "countdown": 45
-                  },
-                  "vehicle": {
-                    "name": "U1",
-                    "towards": "Alaudagasse",
                     "direction": "R",
                     "platform": "2",
                     "richtungsId": "2",
                     "barrierFree": true,
                     "foldingRamp": false,
+                    "cooling": false,
                     "realtimeSupported": true,
                     "trafficjam": false,
                     "type": "ptMetro",
@@ -579,30 +339,9 @@
                 },
                 {
                   "departureTime": {
-                    "timePlanned": "2026-03-29T17:57:00+0200",
-                    "timeReal": "2026-03-29T17:57:00+0200",
-                    "countdown": 50
-                  },
-                  "vehicle": {
-                    "name": "U1",
-                    "towards": "Oberlaa",
-                    "direction": "R",
-                    "platform": "2",
-                    "richtungsId": "2",
-                    "barrierFree": true,
-                    "foldingRamp": true,
-                    "realtimeSupported": true,
-                    "trafficjam": false,
-                    "type": "ptMetro",
-                    "attributes": {},
-                    "linienId": 301
-                  }
-                },
-                {
-                  "departureTime": {
-                    "timePlanned": "2026-03-29T18:02:00+0200",
-                    "timeReal": "2026-03-29T18:02:00+0200",
-                    "countdown": 55
+                    "timePlanned": "2026-07-29T23:02:30.000+0200",
+                    "timeReal": "2026-07-29T23:02:30.000+0200",
+                    "countdown": 23
                   },
                   "vehicle": {
                     "name": "U1",
@@ -612,6 +351,7 @@
                     "richtungsId": "2",
                     "barrierFree": true,
                     "foldingRamp": true,
+                    "cooling": true,
                     "realtimeSupported": true,
                     "trafficjam": false,
                     "type": "ptMetro",
@@ -621,9 +361,9 @@
                 },
                 {
                   "departureTime": {
-                    "timePlanned": "2026-03-29T18:07:00+0200",
-                    "timeReal": "2026-03-29T18:07:00+0200",
-                    "countdown": 60
+                    "timePlanned": "2026-07-29T23:10:00.000+0200",
+                    "timeReal": "2026-07-29T23:10:00.000+0200",
+                    "countdown": 31
                   },
                   "vehicle": {
                     "name": "U1",
@@ -633,6 +373,7 @@
                     "richtungsId": "2",
                     "barrierFree": true,
                     "foldingRamp": true,
+                    "cooling": true,
                     "realtimeSupported": true,
                     "trafficjam": false,
                     "type": "ptMetro",
@@ -642,9 +383,9 @@
                 },
                 {
                   "departureTime": {
-                    "timePlanned": "2026-03-29T18:12:00+0200",
-                    "timeReal": "2026-03-29T18:12:00+0200",
-                    "countdown": 65
+                    "timePlanned": "2026-07-29T23:17:30.000+0200",
+                    "timeReal": "2026-07-29T23:17:30.000+0200",
+                    "countdown": 38
                   },
                   "vehicle": {
                     "name": "U1",
@@ -654,6 +395,95 @@
                     "richtungsId": "2",
                     "barrierFree": true,
                     "foldingRamp": true,
+                    "cooling": true,
+                    "realtimeSupported": true,
+                    "trafficjam": false,
+                    "type": "ptMetro",
+                    "attributes": {},
+                    "linienId": 301
+                  }
+                },
+                {
+                  "departureTime": {
+                    "timePlanned": "2026-07-29T23:25:00.000+0200",
+                    "timeReal": "2026-07-29T23:25:00.000+0200",
+                    "countdown": 46
+                  },
+                  "vehicle": {
+                    "name": "U1",
+                    "towards": "Oberlaa",
+                    "direction": "R",
+                    "platform": "2",
+                    "richtungsId": "2",
+                    "barrierFree": true,
+                    "foldingRamp": false,
+                    "cooling": false,
+                    "realtimeSupported": true,
+                    "trafficjam": false,
+                    "type": "ptMetro",
+                    "attributes": {},
+                    "linienId": 301
+                  }
+                },
+                {
+                  "departureTime": {
+                    "timePlanned": "2026-07-29T23:32:30.000+0200",
+                    "timeReal": "2026-07-29T23:32:30.000+0200",
+                    "countdown": 53
+                  },
+                  "vehicle": {
+                    "name": "U1",
+                    "towards": "Alaudagasse",
+                    "direction": "R",
+                    "platform": "2",
+                    "richtungsId": "2",
+                    "barrierFree": true,
+                    "foldingRamp": true,
+                    "cooling": true,
+                    "realtimeSupported": true,
+                    "trafficjam": false,
+                    "type": "ptMetro",
+                    "attributes": {},
+                    "linienId": 301
+                  }
+                },
+                {
+                  "departureTime": {
+                    "timePlanned": "2026-07-29T23:40:00.000+0200",
+                    "timeReal": "2026-07-29T23:40:00.000+0200",
+                    "countdown": 61
+                  },
+                  "vehicle": {
+                    "name": "U1",
+                    "towards": "Oberlaa",
+                    "direction": "R",
+                    "platform": "2",
+                    "richtungsId": "2",
+                    "barrierFree": true,
+                    "foldingRamp": false,
+                    "cooling": false,
+                    "realtimeSupported": true,
+                    "trafficjam": false,
+                    "type": "ptMetro",
+                    "attributes": {},
+                    "linienId": 301
+                  }
+                },
+                {
+                  "departureTime": {
+                    "timePlanned": "2026-07-29T23:47:30.000+0200",
+                    "timeReal": "2026-07-29T23:47:30.000+0200",
+                    "countdown": 68
+                  },
+                  "vehicle": {
+                    "name": "U1",
+                    "towards": "Alaudagasse",
+                    "direction": "R",
+                    "platform": "2",
+                    "richtungsId": "2",
+                    "barrierFree": true,
+                    "foldingRamp": true,
+                    "cooling": true,
                     "realtimeSupported": true,
                     "trafficjam": false,
                     "type": "ptMetro",
@@ -668,680 +498,12 @@
           }
         ],
         "attributes": {}
-      },
-      {
-        "locationStop": {
-          "type": "Feature",
-          "geometry": {
-            "type": "Point",
-            "coordinates": [16.3696311, 48.2003446]
-          },
-          "properties": {
-            "name": "60200657",
-            "title": "Karlsplatz",
-            "municipality": "Wien",
-            "municipalityId": 49000001,
-            "type": "stop",
-            "coordName": "WGS84",
-            "gate": "1",
-            "attributes": {
-              "rbl": 4421
-            }
-          }
-        },
-        "lines": [
-          {
-            "name": "U4",
-            "towards": "Heiligenstadt",
-            "direction": "H",
-            "platform": "1",
-            "richtungsId": "1",
-            "barrierFree": true,
-            "realtimeSupported": true,
-            "trafficjam": false,
-            "departures": {
-              "departure": [
-                {
-                  "departureTime": {
-                    "timePlanned": "2026-03-29T17:11:00+0200",
-                    "timeReal": "2026-03-29T17:09:33+0200",
-                    "countdown": 3
-                  },
-                  "vehicle": {
-                    "name": "U4",
-                    "towards": "Heiligenstadt",
-                    "direction": "H",
-                    "platform": "1",
-                    "richtungsId": "1",
-                    "barrierFree": true,
-                    "foldingRamp": false,
-                    "realtimeSupported": true,
-                    "trafficjam": false,
-                    "type": "ptMetro",
-                    "attributes": {},
-                    "linienId": 304
-                  }
-                },
-                {
-                  "departureTime": {
-                    "timePlanned": "2026-03-29T17:16:00+0200",
-                    "timeReal": "2026-03-29T17:14:58+0200",
-                    "countdown": 8
-                  },
-                  "vehicle": {
-                    "name": "U4",
-                    "towards": "Heiligenstadt",
-                    "direction": "H",
-                    "platform": "1",
-                    "richtungsId": "1",
-                    "barrierFree": true,
-                    "foldingRamp": true,
-                    "realtimeSupported": true,
-                    "trafficjam": false,
-                    "type": "ptMetro",
-                    "attributes": {},
-                    "linienId": 304
-                  }
-                },
-                {
-                  "departureTime": {
-                    "timePlanned": "2026-03-29T17:21:00+0200",
-                    "timeReal": "2026-03-29T17:19:49+0200",
-                    "countdown": 13
-                  },
-                  "vehicle": {
-                    "name": "U4",
-                    "towards": "Heiligenstadt",
-                    "direction": "H",
-                    "platform": "1",
-                    "richtungsId": "1",
-                    "barrierFree": true,
-                    "foldingRamp": false,
-                    "realtimeSupported": true,
-                    "trafficjam": false,
-                    "type": "ptMetro",
-                    "attributes": {},
-                    "linienId": 304
-                  }
-                },
-                {
-                  "departureTime": {
-                    "timePlanned": "2026-03-29T17:26:00+0200",
-                    "timeReal": "2026-03-29T17:26:00+0200",
-                    "countdown": 19
-                  },
-                  "vehicle": {
-                    "name": "U4",
-                    "towards": "Heiligenstadt",
-                    "direction": "H",
-                    "platform": "1",
-                    "richtungsId": "1",
-                    "barrierFree": true,
-                    "foldingRamp": true,
-                    "realtimeSupported": true,
-                    "trafficjam": false,
-                    "type": "ptMetro",
-                    "attributes": {},
-                    "linienId": 304
-                  }
-                },
-                {
-                  "departureTime": {
-                    "timePlanned": "2026-03-29T17:31:00+0200",
-                    "timeReal": "2026-03-29T17:31:00+0200",
-                    "countdown": 24
-                  },
-                  "vehicle": {
-                    "name": "U4",
-                    "towards": "Heiligenstadt",
-                    "direction": "H",
-                    "platform": "1",
-                    "richtungsId": "1",
-                    "barrierFree": true,
-                    "foldingRamp": false,
-                    "realtimeSupported": true,
-                    "trafficjam": false,
-                    "type": "ptMetro",
-                    "attributes": {},
-                    "linienId": 304
-                  }
-                },
-                {
-                  "departureTime": {
-                    "timePlanned": "2026-03-29T17:36:00+0200",
-                    "timeReal": "2026-03-29T17:36:00+0200",
-                    "countdown": 29
-                  },
-                  "vehicle": {
-                    "name": "U4",
-                    "towards": "Heiligenstadt",
-                    "direction": "H",
-                    "platform": "1",
-                    "richtungsId": "1",
-                    "barrierFree": true,
-                    "foldingRamp": true,
-                    "realtimeSupported": true,
-                    "trafficjam": false,
-                    "type": "ptMetro",
-                    "attributes": {},
-                    "linienId": 304
-                  }
-                },
-                {
-                  "departureTime": {
-                    "timePlanned": "2026-03-29T17:41:00+0200",
-                    "timeReal": "2026-03-29T17:41:00+0200",
-                    "countdown": 34
-                  },
-                  "vehicle": {
-                    "name": "U4",
-                    "towards": "Heiligenstadt",
-                    "direction": "H",
-                    "platform": "1",
-                    "richtungsId": "1",
-                    "barrierFree": true,
-                    "foldingRamp": false,
-                    "realtimeSupported": true,
-                    "trafficjam": false,
-                    "type": "ptMetro",
-                    "attributes": {},
-                    "linienId": 304
-                  }
-                },
-                {
-                  "departureTime": {
-                    "timePlanned": "2026-03-29T17:46:00+0200",
-                    "timeReal": "2026-03-29T17:46:00+0200",
-                    "countdown": 39
-                  },
-                  "vehicle": {
-                    "name": "U4",
-                    "towards": "Heiligenstadt",
-                    "direction": "H",
-                    "platform": "1",
-                    "richtungsId": "1",
-                    "barrierFree": true,
-                    "foldingRamp": true,
-                    "realtimeSupported": true,
-                    "trafficjam": false,
-                    "type": "ptMetro",
-                    "attributes": {},
-                    "linienId": 304
-                  }
-                },
-                {
-                  "departureTime": {
-                    "timePlanned": "2026-03-29T17:51:00+0200",
-                    "timeReal": "2026-03-29T17:51:00+0200",
-                    "countdown": 44
-                  },
-                  "vehicle": {
-                    "name": "U4",
-                    "towards": "Heiligenstadt",
-                    "direction": "H",
-                    "platform": "1",
-                    "richtungsId": "1",
-                    "barrierFree": true,
-                    "foldingRamp": true,
-                    "realtimeSupported": true,
-                    "trafficjam": false,
-                    "type": "ptMetro",
-                    "attributes": {},
-                    "linienId": 304
-                  }
-                },
-                {
-                  "departureTime": {
-                    "timePlanned": "2026-03-29T17:56:00+0200",
-                    "timeReal": "2026-03-29T17:56:00+0200",
-                    "countdown": 49
-                  },
-                  "vehicle": {
-                    "name": "U4",
-                    "towards": "Heiligenstadt",
-                    "direction": "H",
-                    "platform": "1",
-                    "richtungsId": "1",
-                    "barrierFree": true,
-                    "foldingRamp": true,
-                    "realtimeSupported": true,
-                    "trafficjam": false,
-                    "type": "ptMetro",
-                    "attributes": {},
-                    "linienId": 304
-                  }
-                },
-                {
-                  "departureTime": {
-                    "timePlanned": "2026-03-29T18:01:00+0200",
-                    "timeReal": "2026-03-29T18:01:00+0200",
-                    "countdown": 54
-                  },
-                  "vehicle": {
-                    "name": "U4",
-                    "towards": "Heiligenstadt",
-                    "direction": "H",
-                    "platform": "1",
-                    "richtungsId": "1",
-                    "barrierFree": true,
-                    "foldingRamp": false,
-                    "realtimeSupported": true,
-                    "trafficjam": false,
-                    "type": "ptMetro",
-                    "attributes": {},
-                    "linienId": 304
-                  }
-                },
-                {
-                  "departureTime": {
-                    "timePlanned": "2026-03-29T18:06:00+0200",
-                    "timeReal": "2026-03-29T18:06:00+0200",
-                    "countdown": 59
-                  },
-                  "vehicle": {
-                    "name": "U4",
-                    "towards": "Heiligenstadt",
-                    "direction": "H",
-                    "platform": "1",
-                    "richtungsId": "1",
-                    "barrierFree": true,
-                    "foldingRamp": true,
-                    "realtimeSupported": true,
-                    "trafficjam": false,
-                    "type": "ptMetro",
-                    "attributes": {},
-                    "linienId": 304
-                  }
-                },
-                {
-                  "departureTime": {
-                    "timePlanned": "2026-03-29T18:11:00+0200",
-                    "timeReal": "2026-03-29T18:11:00+0200",
-                    "countdown": 64
-                  },
-                  "vehicle": {
-                    "name": "U4",
-                    "towards": "Heiligenstadt",
-                    "direction": "H",
-                    "platform": "1",
-                    "richtungsId": "1",
-                    "barrierFree": true,
-                    "foldingRamp": true,
-                    "realtimeSupported": true,
-                    "trafficjam": false,
-                    "type": "ptMetro",
-                    "attributes": {},
-                    "linienId": 304
-                  }
-                },
-                {
-                  "departureTime": {
-                    "timePlanned": "2026-03-29T18:16:00+0200",
-                    "timeReal": "2026-03-29T18:16:00+0200",
-                    "countdown": 69
-                  },
-                  "vehicle": {
-                    "name": "U4",
-                    "towards": "Heiligenstadt",
-                    "direction": "H",
-                    "platform": "1",
-                    "richtungsId": "1",
-                    "barrierFree": true,
-                    "foldingRamp": true,
-                    "realtimeSupported": true,
-                    "trafficjam": false,
-                    "type": "ptMetro",
-                    "attributes": {},
-                    "linienId": 304
-                  }
-                }
-              ]
-            },
-            "type": "ptMetro",
-            "lineId": 304
-          }
-        ],
-        "attributes": {}
-      },
-      {
-        "locationStop": {
-          "type": "Feature",
-          "geometry": {
-            "type": "Point",
-            "coordinates": [16.3696581, 48.2003925]
-          },
-          "properties": {
-            "name": "60200657",
-            "title": "Karlsplatz",
-            "municipality": "Wien",
-            "municipalityId": 49000001,
-            "type": "stop",
-            "coordName": "WGS84",
-            "gate": "2",
-            "attributes": {
-              "rbl": 4416
-            }
-          }
-        },
-        "lines": [
-          {
-            "name": "U4",
-            "towards": "Hütteldorf",
-            "direction": "R",
-            "platform": "2",
-            "richtungsId": "2",
-            "barrierFree": true,
-            "realtimeSupported": true,
-            "trafficjam": false,
-            "departures": {
-              "departure": [
-                {
-                  "departureTime": {
-                    "timePlanned": "2026-03-29T17:07:00+0200",
-                    "timeReal": "2026-03-29T17:07:40+0200",
-                    "countdown": 1
-                  },
-                  "vehicle": {
-                    "name": "U4",
-                    "towards": "Hütteldorf",
-                    "direction": "R",
-                    "platform": "2",
-                    "richtungsId": "2",
-                    "barrierFree": true,
-                    "foldingRamp": true,
-                    "realtimeSupported": true,
-                    "trafficjam": false,
-                    "type": "ptMetro",
-                    "attributes": {},
-                    "linienId": 304
-                  }
-                },
-                {
-                  "departureTime": {
-                    "timePlanned": "2026-03-29T17:12:00+0200",
-                    "timeReal": "2026-03-29T17:12:55+0200",
-                    "countdown": 6
-                  },
-                  "vehicle": {
-                    "name": "U4",
-                    "towards": "Hütteldorf",
-                    "direction": "R",
-                    "platform": "2",
-                    "richtungsId": "2",
-                    "barrierFree": true,
-                    "foldingRamp": true,
-                    "realtimeSupported": true,
-                    "trafficjam": false,
-                    "type": "ptMetro",
-                    "attributes": {},
-                    "linienId": 304
-                  }
-                },
-                {
-                  "departureTime": {
-                    "timePlanned": "2026-03-29T17:17:00+0200",
-                    "timeReal": "2026-03-29T17:18:15+0200",
-                    "countdown": 11
-                  },
-                  "vehicle": {
-                    "name": "U4",
-                    "towards": "Hütteldorf",
-                    "direction": "R",
-                    "platform": "2",
-                    "richtungsId": "2",
-                    "barrierFree": true,
-                    "foldingRamp": false,
-                    "realtimeSupported": true,
-                    "trafficjam": false,
-                    "type": "ptMetro",
-                    "attributes": {},
-                    "linienId": 304
-                  }
-                },
-                {
-                  "departureTime": {
-                    "timePlanned": "2026-03-29T17:22:00+0200",
-                    "timeReal": "2026-03-29T17:22:00+0200",
-                    "countdown": 15
-                  },
-                  "vehicle": {
-                    "name": "U4",
-                    "towards": "Hütteldorf",
-                    "direction": "R",
-                    "platform": "2",
-                    "richtungsId": "2",
-                    "barrierFree": true,
-                    "foldingRamp": true,
-                    "realtimeSupported": true,
-                    "trafficjam": false,
-                    "type": "ptMetro",
-                    "attributes": {},
-                    "linienId": 304
-                  }
-                },
-                {
-                  "departureTime": {
-                    "timePlanned": "2026-03-29T17:27:00+0200",
-                    "timeReal": "2026-03-29T17:27:00+0200",
-                    "countdown": 20
-                  },
-                  "vehicle": {
-                    "name": "U4",
-                    "towards": "Hütteldorf",
-                    "direction": "R",
-                    "platform": "2",
-                    "richtungsId": "2",
-                    "barrierFree": true,
-                    "foldingRamp": true,
-                    "realtimeSupported": true,
-                    "trafficjam": false,
-                    "type": "ptMetro",
-                    "attributes": {},
-                    "linienId": 304
-                  }
-                },
-                {
-                  "departureTime": {
-                    "timePlanned": "2026-03-29T17:32:00+0200",
-                    "timeReal": "2026-03-29T17:32:00+0200",
-                    "countdown": 25
-                  },
-                  "vehicle": {
-                    "name": "U4",
-                    "towards": "Hütteldorf",
-                    "direction": "R",
-                    "platform": "2",
-                    "richtungsId": "2",
-                    "barrierFree": true,
-                    "foldingRamp": true,
-                    "realtimeSupported": true,
-                    "trafficjam": false,
-                    "type": "ptMetro",
-                    "attributes": {},
-                    "linienId": 304
-                  }
-                },
-                {
-                  "departureTime": {
-                    "timePlanned": "2026-03-29T17:37:00+0200",
-                    "timeReal": "2026-03-29T17:37:00+0200",
-                    "countdown": 30
-                  },
-                  "vehicle": {
-                    "name": "U4",
-                    "towards": "Hütteldorf",
-                    "direction": "R",
-                    "platform": "2",
-                    "richtungsId": "2",
-                    "barrierFree": true,
-                    "foldingRamp": true,
-                    "realtimeSupported": true,
-                    "trafficjam": false,
-                    "type": "ptMetro",
-                    "attributes": {},
-                    "linienId": 304
-                  }
-                },
-                {
-                  "departureTime": {
-                    "timePlanned": "2026-03-29T17:42:00+0200",
-                    "timeReal": "2026-03-29T17:42:00+0200",
-                    "countdown": 35
-                  },
-                  "vehicle": {
-                    "name": "U4",
-                    "towards": "Hütteldorf",
-                    "direction": "R",
-                    "platform": "2",
-                    "richtungsId": "2",
-                    "barrierFree": true,
-                    "foldingRamp": false,
-                    "realtimeSupported": true,
-                    "trafficjam": false,
-                    "type": "ptMetro",
-                    "attributes": {},
-                    "linienId": 304
-                  }
-                },
-                {
-                  "departureTime": {
-                    "timePlanned": "2026-03-29T17:47:00+0200",
-                    "timeReal": "2026-03-29T17:47:00+0200",
-                    "countdown": 40
-                  },
-                  "vehicle": {
-                    "name": "U4",
-                    "towards": "Hütteldorf",
-                    "direction": "R",
-                    "platform": "2",
-                    "richtungsId": "2",
-                    "barrierFree": true,
-                    "foldingRamp": true,
-                    "realtimeSupported": true,
-                    "trafficjam": false,
-                    "type": "ptMetro",
-                    "attributes": {},
-                    "linienId": 304
-                  }
-                },
-                {
-                  "departureTime": {
-                    "timePlanned": "2026-03-29T17:52:00+0200",
-                    "timeReal": "2026-03-29T17:52:00+0200",
-                    "countdown": 45
-                  },
-                  "vehicle": {
-                    "name": "U4",
-                    "towards": "Hütteldorf",
-                    "direction": "R",
-                    "platform": "2",
-                    "richtungsId": "2",
-                    "barrierFree": true,
-                    "foldingRamp": false,
-                    "realtimeSupported": true,
-                    "trafficjam": false,
-                    "type": "ptMetro",
-                    "attributes": {},
-                    "linienId": 304
-                  }
-                },
-                {
-                  "departureTime": {
-                    "timePlanned": "2026-03-29T17:57:00+0200",
-                    "timeReal": "2026-03-29T17:57:00+0200",
-                    "countdown": 50
-                  },
-                  "vehicle": {
-                    "name": "U4",
-                    "towards": "Hütteldorf",
-                    "direction": "R",
-                    "platform": "2",
-                    "richtungsId": "2",
-                    "barrierFree": true,
-                    "foldingRamp": true,
-                    "realtimeSupported": true,
-                    "trafficjam": false,
-                    "type": "ptMetro",
-                    "attributes": {},
-                    "linienId": 304
-                  }
-                },
-                {
-                  "departureTime": {
-                    "timePlanned": "2026-03-29T18:02:00+0200",
-                    "timeReal": "2026-03-29T18:02:00+0200",
-                    "countdown": 55
-                  },
-                  "vehicle": {
-                    "name": "U4",
-                    "towards": "Hütteldorf",
-                    "direction": "R",
-                    "platform": "2",
-                    "richtungsId": "2",
-                    "barrierFree": true,
-                    "foldingRamp": false,
-                    "realtimeSupported": true,
-                    "trafficjam": false,
-                    "type": "ptMetro",
-                    "attributes": {},
-                    "linienId": 304
-                  }
-                },
-                {
-                  "departureTime": {
-                    "timePlanned": "2026-03-29T18:07:00+0200",
-                    "timeReal": "2026-03-29T18:07:00+0200",
-                    "countdown": 60
-                  },
-                  "vehicle": {
-                    "name": "U4",
-                    "towards": "Hütteldorf",
-                    "direction": "R",
-                    "platform": "2",
-                    "richtungsId": "2",
-                    "barrierFree": true,
-                    "foldingRamp": true,
-                    "realtimeSupported": true,
-                    "trafficjam": false,
-                    "type": "ptMetro",
-                    "attributes": {},
-                    "linienId": 304
-                  }
-                },
-                {
-                  "departureTime": {
-                    "timePlanned": "2026-03-29T18:12:00+0200",
-                    "timeReal": "2026-03-29T18:12:00+0200",
-                    "countdown": 65
-                  },
-                  "vehicle": {
-                    "name": "U4",
-                    "towards": "Hütteldorf",
-                    "direction": "R",
-                    "platform": "2",
-                    "richtungsId": "2",
-                    "barrierFree": true,
-                    "foldingRamp": false,
-                    "realtimeSupported": true,
-                    "trafficjam": false,
-                    "type": "ptMetro",
-                    "attributes": {},
-                    "linienId": 304
-                  }
-                }
-              ]
-            },
-            "type": "ptMetro",
-            "lineId": 304
-          }
-        ],
-        "attributes": {}
       }
     ]
   },
   "message": {
     "value": "OK",
     "messageCode": 1,
-    "serverTime": "2026-03-29T17:06:24.000+0200"
+    "serverTime": "2026-07-29T22:38:46.000+0200"
   }
 }

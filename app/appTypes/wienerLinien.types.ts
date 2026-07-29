@@ -60,7 +60,7 @@ interface Vehicle {
   richtungsId: string;
   barrierFree: boolean;
   foldingRamp?: boolean;
-  cooling?: boolean;
+  cooling: boolean;
   onStop?: boolean;
   realtimeSupported: boolean;
   trafficjam: boolean;

@@ -2,7 +2,7 @@
 
 A compact dashboard for Vienna public transport departures.
 
-It renders HTML server-side, groups departure data by stop, highlights disruptions, accepts custom stop IDs through the query string, and shows whether metros are air-conditioned.
+It renders HTML server-side, groups departure data by stop, highlights disruptions, accepts custom stop IDs through the query string, and shows whether vehicles are air-conditioned.
 
 <p align="center">
     <img height="400" alt="Screenshot of the Dashboard" src="https://github.com/user-attachments/assets/64984569-f2d3-4777-b67a-d6f8924ee89c" />
@@ -27,7 +27,7 @@ http://<url>/?stopID=123&stopID=456&id=789
 
 The dashboard accepts up to 10 stop IDs.
 
-Metro A/C is not officially exposed as an air-conditioning field in the API. The app infers it from the `vehicle.foldingRamp` value for each metro departure.
+The A/C indicator uses the API's `vehicle.cooling` value for each departure, including buses, trams, and metros.
 
 The requests to the Wiener Linien API are made on the server in [`app/services/wienerLinien.server.ts`](app/services/wienerLinien.server.ts).
 
