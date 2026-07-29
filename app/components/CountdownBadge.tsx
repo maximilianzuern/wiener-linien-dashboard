@@ -5,22 +5,14 @@ type CountdownBadgeProps = {
   countdown: number;
   timePlanned?: string;
   timeReal?: string;
-  type?: string;
-  hasAircon?: boolean;
+  hasCooling?: boolean;
 };
 
-const CountdownBadge = ({
-  countdown,
-  timePlanned,
-  timeReal,
-  type,
-  hasAircon,
-}: CountdownBadgeProps) => {
+const CountdownBadge = ({ countdown, timePlanned, timeReal, hasCooling }: CountdownBadgeProps) => {
   const isImmediate = countdown == 0;
-  const isMetro = type === "ptMetro";
 
   const hasTimingInfo = Boolean(timeReal || timePlanned);
-  const shouldShowAirconBadge = isMetro && hasAircon != null;
+  const shouldShowCoolingBadge = hasCooling != null;
 
   const popoverText =
     timeReal && timeReal !== "Invalid Date" ? timeReal : `Planned: ${timePlanned ?? ""}`;
@@ -50,12 +42,12 @@ const CountdownBadge = ({
         countdownBadge
       )}
 
-      {shouldShowAirconBadge && (
+      {shouldShowCoolingBadge && (
         <span
           className="absolute -top-2.5 -right-1.5 inline-flex h-4 w-4 items-center justify-center text-sm leading-none"
-          title={hasAircon ? "❄️ A/C available" : "🥵 No A/C"}
+          title={hasCooling ? "❄️ A/C available" : "🥵 No A/C"}
         >
-          {hasAircon ? (
+          {hasCooling ? (
             <Snowflake className="h-4 w-4 text-blue-500" strokeWidth="2" />
           ) : (
             <Flame className="h-4 w-4 text-orange-600" strokeWidth="3" />

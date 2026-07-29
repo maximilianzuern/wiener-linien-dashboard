@@ -2,11 +2,7 @@ import { Text } from "@cloudflare/kumo";
 
 import type { ParsedLine } from "~/appTypes/output.types";
 
-import {
-  TRANSPORT_ICON_LOOKUP,
-  MAX_DISPLAYED_COUNTDOWNS,
-  AIRCONDITIONED_METROS,
-} from "../utils/constants";
+import { TRANSPORT_ICON_LOOKUP, MAX_DISPLAYED_COUNTDOWNS } from "../utils/constants";
 import { formatTowards } from "../utils/formatters";
 import { getLineBackgroundColor } from "../utils/lineBackground";
 import CountdownBadge from "./CountdownBadge";
@@ -35,8 +31,7 @@ const LineInfo = ({ line }: { line: ParsedLine }) => (
           <CountdownBadge
             key={i}
             countdown={departure.countdown}
-            hasAircon={AIRCONDITIONED_METROS.includes(line.name) || departure.aircon}
-            type={line.type}
+            hasCooling={departure.cooling}
             timePlanned={departure.timePlanned}
             timeReal={departure.timeReal}
           />

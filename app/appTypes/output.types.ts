@@ -2,7 +2,7 @@ export type ParsedDeparture = {
   countdown: number;
   timePlanned?: string;
   timeReal?: string;
-  aircon?: boolean;
+  cooling?: boolean;
 };
 
 export type ParsedDisruption = {
