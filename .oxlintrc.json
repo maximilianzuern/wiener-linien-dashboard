@@ -4,7 +4,7 @@
   "categories": {
     "correctness": "error"
   },
-  "rules": {},
+  "rules": { "complexity": ["error", { "max": 20 }] },
   "env": {
     "builtin": true
   }
